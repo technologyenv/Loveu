@@ -3,25 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>إلى نونو العالمي | من يوني 💖</title>
+  <title>إلى نونو الغالي | من يوني 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap');
 
     :root{
-      --bg1:#ffe4e1;
-      --bg2:#fff8fc;
-      --card:rgba(255,255,255,.72);
+      --bg1:#ffe6e8;
+      --bg2:#fff9fc;
+      --card:rgba(255,255,255,.74);
       --pink:#f06292;
       --deep:#ad1457;
-      --line:rgba(240,98,146,.22);
-      --text:#5a1230;
+      --line:rgba(240,98,146,.24);
+      --text:#5c1731;
       --shadow:0 18px 46px rgba(173,20,87,.12);
     }
 
     *{box-sizing:border-box}
     html, body{
       margin:0;
-      padding:0;
       width:100%;
       min-height:100%;
       overflow-x:hidden;
@@ -32,7 +31,7 @@
       font-family:'Cairo',sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at top, #fff 0%, var(--bg2) 34%, var(--bg1) 100%);
+        radial-gradient(circle at top, #fff 0%, var(--bg2) 35%, var(--bg1) 100%);
       position:relative;
     }
 
@@ -47,9 +46,9 @@
     .bg-heart{
       position:absolute;
       color:rgba(240,98,146,.16);
-      font-size:18px;
       animation: float 14s linear infinite;
       will-change:transform;
+      user-select:none;
     }
 
     @keyframes float{
@@ -63,7 +62,8 @@
       flex-direction:column;
       align-items:center;
       justify-content:center;
-      padding:28px 16px;
+      padding:24px 16px;
+      text-align:center;
     }
 
     .heart-stage{
@@ -72,21 +72,21 @@
       position:relative;
       display:grid;
       place-items:center;
-      margin:0 auto 18px;
-      perspective:1000px;
+      margin-bottom:18px;
+      perspective:1200px;
       transform:translateZ(0);
     }
 
     .heart-core{
       position:absolute;
-      width:min(210px, 38vw);
+      width:min(200px, 38vw);
       aspect-ratio:1/1;
-      transform:rotate(-45deg) translateZ(0);
-      background:linear-gradient(135deg, #ff8fb1 0%, #f06292 45%, #ad1457 100%);
+      background:linear-gradient(135deg, #ff96ba 0%, #f06292 45%, #ad1457 100%);
+      transform:rotate(-45deg);
       border-radius:28px;
       box-shadow:
-        0 0 0 10px rgba(255,255,255,.18) inset,
-        0 20px 50px rgba(173,20,87,.25);
+        0 0 0 10px rgba(255,255,255,.16) inset,
+        0 20px 50px rgba(173,20,87,.24);
       animation:pulse 2.7s ease-in-out infinite;
       z-index:1;
     }
@@ -106,14 +106,12 @@
 
     @keyframes pulse{
       0%,100%{transform:rotate(-45deg) scale(1)}
-      50%{transform:rotate(-45deg) scale(1.06)}
+      50%{transform:rotate(-45deg) scale(1.05)}
     }
 
     .orbit-layer{
       position:absolute;
       inset:0;
-      border-radius:50%;
-      transform-style:preserve-3d;
       z-index:2;
       pointer-events:none;
     }
@@ -122,43 +120,29 @@
       position:absolute;
       left:50%;
       top:50%;
-      font-weight:800;
       color:var(--deep);
-      font-size:clamp(.85rem, 1.5vw, 1.08rem);
+      font-weight:800;
+      font-size:clamp(.9rem, 1.5vw, 1.1rem);
       white-space:nowrap;
       text-shadow:0 0 8px rgba(255,255,255,.95);
-      transform-style:preserve-3d;
-      will-change:transform, opacity;
-      animation: orbit 6.5s linear infinite;
+      will-change:transform;
+      animation: orbit 7s linear infinite;
     }
 
     @keyframes orbit{
       0%{
-        transform:
-          translate(-50%, -50%)
-          rotateY(0deg)
-          translateZ(150px)
-          rotateX(15deg)
-          scale(1);
+        transform:translate(-50%, -50%) rotate(0deg) translateX(150px) scale(1);
         opacity:1;
       }
-      50%{
-        opacity:.92;
-      }
+      50%{ opacity:.9; }
       100%{
-        transform:
-          translate(-50%, -50%)
-          rotateY(360deg)
-          translateZ(150px)
-          rotateX(15deg)
-          scale(1);
+        transform:translate(-50%, -50%) rotate(360deg) translateX(150px) scale(1);
         opacity:1;
       }
     }
 
     .hero-text{
       width:min(760px, 92vw);
-      text-align:center;
       background:var(--card);
       backdrop-filter:blur(12px);
       border:1px solid var(--line);
@@ -170,21 +154,26 @@
     .hero-text h1{
       margin:0 0 8px;
       color:var(--deep);
-      font-size:clamp(1.55rem, 3.2vw, 2.4rem);
+      font-size:clamp(1.6rem, 3vw, 2.4rem);
       line-height:1.5;
     }
 
     .hero-text p{
       margin:0;
-      font-size:1.05rem;
       line-height:1.95;
+      font-size:1.05rem;
     }
 
     .hint{
       margin-top:18px;
       color:var(--deep);
       font-weight:800;
-      text-align:center;
+      animation:bounce 1.5s infinite;
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(8px)}
     }
 
     .page{
@@ -209,17 +198,6 @@
       overflow:hidden;
     }
 
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:auto -40px -70px auto;
-      width:180px;
-      height:180px;
-      background:radial-gradient(circle, rgba(240,98,146,.12), transparent 65%);
-      border-radius:50%;
-      pointer-events:none;
-    }
-
     .sticker{font-size:2.6rem; display:inline-block; margin-bottom:8px}
 
     .card h2{
@@ -239,11 +217,12 @@
       color:#fff;
       border:none;
     }
+
     .accent h2, .accent p{color:#fff}
 
     .game-box{
       margin-top:14px;
-      min-height:250px;
+      min-height:260px;
       background:linear-gradient(180deg, #fff8fc, #fff);
       border:2px dashed rgba(240,98,146,.35);
       border-radius:22px;
@@ -355,7 +334,7 @@
 
     <div class="hero-text">
       <h1>إلى نونو الغالي من يوني 💖</h1>
-      <p>إنت أغلى شخص، وأحن قلب، وأجمل سند. لو الدنيا زعّلتك، فاعرف إن يوني دايمًا شايفاكي قوي ومميز ومهم جدًا.</p>
+      <p>إنت أغلى شخص، وأحن قلب، وأجمل سند. لو الدنيا زعّلتك، يوني دايمًا شايفاكي قوي ومهم ومميز جدًا.</p>
     </div>
 
     <div class="hint">انزل لتحت عشان تلاقي المفاجآت ✨</div>
@@ -365,13 +344,13 @@
     <section class="card">
       <span class="sticker">👑</span>
       <h2>لنونو اللي محدش بيشبهه</h2>
-      <p>إنت مش بس مهم، إنت أصل الحكاية الحلوة. وجودك بيطمن، وابتسامتك بتفرق، وهدوءك بيخلّي الدنيا أرقى.</p>
+      <p>إنت مش بس غالي، إنت راحة للقلب. وجودك بيطمن، وابتسامتك بتفرق، وروحك ليها قيمة كبيرة.</p>
       <p>يوني بتحبك وبتفخر بيك، وبتقولك: خليك مطمن، إنت ماشي صح حتى لو الطريق متعب شوية.</p>
     </section>
 
     <section class="card accent">
       <span class="sticker">✨</span>
-      <p style="font-size:1.15rem;font-weight:800;">"يا نونو، إنت مش لوحدك أبدًا.. خُد نفس وارتاح شوية، وأنا دايمًا جنبك في كل خطوة."</p>
+      <p style="font-size:1.15rem;font-weight:800;">"يا نونو، إنت مش لوحدك أبدًا.. خُد نفس وارتاح شوية، وأنا جنبك في كل خطوة."</p>
     </section>
 
     <section class="card">
@@ -403,7 +382,7 @@
       <h2>كلام يطمن نونو</h2>
       <div class="mini-grid">
         <div class="mini"><strong>رسالة 1</strong><span>أنت مش محتاج تثبت قيمتك.. هي واضحة من غير مجهود.</span></div>
-        <div class="mini"><strong>رسالة 2</strong><span>الراحة مش تأخير، دي محطة لملمّ فيها قلبك وبعدين تكمل.</span></div>
+        <div class="mini"><strong>رسالة 2</strong><span>الراحة مش تأخير، دي محطة نلمّ فيها القلب وبعدين نكمل.</span></div>
         <div class="mini"><strong>رسالة 3</strong><span>أي يوم صعب هو يوم ويمشي، لكن جمال روحك ثابت.</span></div>
         <div class="mini"><strong>رسالة 4</strong><span>يوني دايمًا معاك، في التعب، في الهدوء، وفي كل بداية جديدة.</span></div>
       </div>
@@ -420,10 +399,10 @@
 
   <script>
     const orbitLayer = document.getElementById('orbitLayer');
-    const words = ['I love you', 'نونو 💖', 'I love you', 'يوني', 'I love you', 'Forever'];
+    const words = ['I love you', 'نونو', 'I love you', 'يوني', 'I love you', 'Forever'];
     const count = 84;
 
-    for(let i=0;iunt;i++){
+    for(let i=0;i<count;i++){
       const s = document.createElement('span');
       s.className = 'orbit-word';
       s.textContent = words[i % words.length];
@@ -448,9 +427,7 @@
       h.style.left = Math.random() * 86 + '%';
       h.style.top = Math.random() * 76 + '%';
       gameBoard.appendChild(h);
-
       const removeTimer = setTimeout(() => h.remove(), 1700);
-
       h.addEventListener('click', () => {
         clearTimeout(removeTimer);
         score = Math.min(100, score + 10);
