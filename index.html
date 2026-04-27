@@ -395,4 +395,157 @@
 
     <section class="card">
       <span class="sticker">👑</span>
-      <h2>لنونو اللي ملوش
+      <h2>لنونو اللي ملوش شبه</h2>
+      <p>إنت أغلى حد، وأطيب قلب، وأجمل روح. حتى لو الدنيا تقيلة، وجودك لوحده كفاية يخلّيها أخف.</p>
+      <p>يوني دايمًا شايفاكي قوي، جميل، ومهم جدًا.. ومهما حصل، في ضهره سند وحب ثابت.</p>
+    </section>
+
+    <section class="card accent-card">
+      <span class="sticker">✨</span>
+      <p style="font-size:1.15rem;font-weight:800;">
+        "خد نفس واهدى، إنت بتعدّي من مرحلة بس مش بتخسر نفسك.. وفي كل خطوة أنا معاك يا نونو."
+      </p>
+    </section>
+
+    <section class="card">
+      <span class="sticker">🎮</span>
+      <h2>لعبة فرقع الشغف</h2>
+      <p>اكبس على القلوب اللي بتظهر قبل ما تختفي، وكل قلب يزود طاقتك.</p>
+      <div class="score" id="scoreText">مستوى الشغف: 0%</div>
+      <div class="game-box" id="gameBoard"></div>
+    </section>
+
+    <section class="card">
+      <span class="sticker">🔐</span>
+      <h2>رسالة سرية لنونو</h2>
+      <p>اكتب كلمة السر: نونو</p>
+      <input type="text" id="secretInput" placeholder="اكتب هنا..." />
+      <div class="secret" id="secretMsg">إنت الشخص اللي محدش بيقدر يعوّضه، ووجودك بيطمن القلب.. يوني بيحبك جدًا 💞</div>
+    </section>
+
+    <section class="card">
+      <span class="sticker">🎁</span>
+      <h2>هدية صغيرة</h2>
+      <p>اضغط على الهدية عشان تشوف المفاجأة.</p>
+      <div class="gift-emoji" id="giftBtn">🎁</div>
+      <div class="secret" id="giftContent">
+        <p>أنت تستاهل كل الخير، وكل يوم حلو، وكل لحظة مطمّنة 💖</p>
+        <div style="font-size:2.4rem;">🦄 🍓 🍬 🌷</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="sticker">🫶</span>
+      <h2>كلام يطمن نونو</h2>
+      <div class="mini-grid">
+        <div class="mini">
+          <strong>رسالة 1</strong>
+          <span>مفيش حاجة فيك ناقصة.. إنت بس محتاج ترتاح شوية وتكمل بعدها.</span>
+        </div>
+        <div class="mini">
+          <strong>رسالة 2</strong>
+          <span>الراحة مش ضعف، والهدوء مش توقف.. ده بس تحميل طاقة من جديد.</span>
+        </div>
+        <div class="mini">
+          <strong>رسالة 3</strong>
+          <span>كل حاجة صعبة بتعدّي، بس القلب الجميل بيبقى ثابت وجميل أكتر.</span>
+        </div>
+        <div class="mini">
+          <strong>رسالة 4</strong>
+          <span>يوني دايمًا فخور بيك، حتى في أيامك اللي حاسس فيها إنك مش تمام.</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <span class="sticker">🌸</span>
+      <h2>جملة تتكرر</h2>
+      <p id="randomLine" style="font-weight:800;color:var(--deep);font-size:1.08rem;"></p>
+    </section>
+
+    <p style="margin:6px 0 30px;color:var(--deep);font-weight:800;">بكل حب من يوني 🌷</p>
+  </main>
+
+  <script>
+    const heartTextLayer = document.getElementById('heartTextLayer');
+    const phrases = ['I love you', 'نونو 💖', 'You are loved', 'يوني جنبك', 'Keep shining'];
+    const totalWords = 72;
+
+    for (let i = 0; i < totalWords; i++) {
+      const item = document.createElement('span');
+      item.className = 'love_word';
+      item.textContent = phrases[i % phrases.length];
+      item.style.animationDelay = `${-(i * 0.12)}s`;
+      const angle = (i / totalWords) * Math.PI * 2;
+      const heartX = 16 * Math.pow(Math.sin(angle), 3);
+      const heartY = -(13 * Math.cos(angle) - 5 * Math.cos(2 * angle) - 2 * Math.cos(3 * angle) - Math.cos(4 * angle));
+      item.style.left = `calc(50% + ${heartX}vw * .9)`;
+      item.style.top = `calc(50% + ${heartY}vh * .9)`;
+      heartTextLayer.appendChild(item);
+    }
+
+    const board = document.getElementById('gameBoard');
+    const scoreText = document.getElementById('scoreText');
+    let score = 0;
+
+    function spawnHeart(){
+      if(score >= 100) return;
+      const heart = document.createElement('div');
+      heart.className = 'collect-heart';
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 86 + '%';
+      heart.style.top = Math.random() * 78 + '%';
+      board.appendChild(heart);
+
+      const removeTimer = setTimeout(() => {
+        if(heart.parentNode) heart.remove();
+      }, 1800);
+
+      heart.addEventListener('click', () => {
+        clearTimeout(removeTimer);
+        score = Math.min(100, score + 10);
+        scoreText.textContent = score < 100 ? `مستوى الشغف: ${score}%` : 'شغفك رجع كامل يا بطل! 😍';
+        heart.remove();
+      });
+    }
+
+    setInterval(spawnHeart, 850);
+
+    const secretInput = document.getElementById('secretInput');
+    const secretMsg = document.getElementById('secretMsg');
+    secretInput.addEventListener('input', () => {
+      const val = secretInput.value.trim();
+      secretMsg.style.display = (val === 'نونو') ? 'block' : 'none';
+    });
+
+    const giftBtn = document.getElementById('giftBtn');
+    const giftContent = document.getElementById('giftContent');
+    giftBtn.addEventListener('click', () => {
+      giftBtn.textContent = '💝';
+      giftContent.style.display = 'block';
+    });
+
+    const floatingPhrases = ['💗', '🌸', '✨', '💞', '🫶', '💖'];
+    function addFloatingHeart(){
+      const h = document.createElement('div');
+      h.className = 'floating-heart';
+      h.textContent = floatingPhrases[Math.floor(Math.random() * floatingPhrases.length)];
+      h.style.left = Math.random() * 100 + 'vw';
+      h.style.fontSize = (18 + Math.random() * 22) + 'px';
+      h.style.animationDuration = (9 + Math.random() * 8) + 's';
+      document.body.appendChild(h);
+      setTimeout(() => h.remove(), 17000);
+    }
+    setInterval(addFloatingHeart, 1400);
+
+    const lines = [
+      'إنت مش محتاج تبهر حد.. إنت أصلًا جميل بطبيعتك.',
+      'اللي بيحبك بجد، هيشوف تعبك ويقف جنبك من غير ما تطلب.',
+      'خد وقتك، مفيش سباق.. المهم إنك ما تسيبش نفسك.',
+      'نونو، إنت أهم من أي ضغط، وأغلى من أي يوم صعب.',
+      'كل لحظة هدوء بترجّع القلب لمكانه الصح.'
+    ];
+    document.getElementById('randomLine').textContent = lines[Math.floor(Math.random() * lines.length)];
+  </script>
+</body>
+</html>
