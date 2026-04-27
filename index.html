@@ -1,3 +1,12 @@
+body {
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100-vh;
+  overflow: hidden;
+}
+
 #ui .love_word {
   color: #ea80b0;
   font-size: 1.4rem;
@@ -5,10 +14,27 @@
   text-shadow: 0 0 10px #fff;
   letter-spacing: 2px;
   white-space: nowrap;
+  position: absolute;
 }
 
 #ui .love_horizontal {
-  animation: horizontal 10000ms
-    infinite alternate ease-in-out;
+  animation: horizontal 10000ms infinite alternate ease-in-out;
   animation-delay: calc(var(--i) * -300ms);
 }
+
+/* دي الحركة اللي بتخلي الكلمات تتحرك وتعمل شكل القلب */
+@keyframes horizontal {
+  from { transform: translateX(-100px); }
+  to { transform: translateX(100px); }
+}
+<div id="ui">
+  <div class="love_horizontal" style="--i: 1">
+    <span class="love_word">I love you</span>
+  </div>
+  <div class="love_horizontal" style="--i: 2">
+    <span class="love_word">I love you</span>
+  </div>
+  <div class="love_horizontal" style="--i: 3">
+    <span class="love_word">I love you</span>
+  </div>
+  </div>
