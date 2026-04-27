@@ -3,52 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heart Animation</title>
+    <title>3D Heart Animation</title>
     <style>
-        /* التنسيق الأساسي للشاشة */
         body {
-            background-color: #000; /* خلفية سوداء زي الفيديو */
+            background-color: #000;
             margin: 0;
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
         }
 
         #ui {
+            perspective: 1000px;
             position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        /* الكود اللي كان في الصورة بالظبط */
-        #ui .love_word {
+        /* الكود اللي في صورتك مع تعديل بسيط للوضوح */
+        .love_word {
             color: #ea80b0;
-            font-size: 1.4rem;
+            font-size: 1.2rem; /* صغرت الخط شوية عشان الكلمات تبان */
             transform: translateY(-100%) rotateZ(-30deg);
             text-shadow: 0 0 10px #fff;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             white-space: nowrap;
-            position: absolute; /* مهم جداً عشان الكلمات تترص فوق بعض */
+            position: absolute;
+            font-weight: bold;
         }
 
-        #ui .love_horizontal {
+        .love_horizontal {
             position: absolute;
+            /* الحركة الأساسية */
             animation: horizontal 10000ms infinite alternate ease-in-out;
             animation-delay: calc(var(--i) * -300ms);
         }
 
-        /* إضافة الحركة (Keyframes) اللي بتخلي الكلمات تتحرك */
         @keyframes horizontal {
-            from {
-                transform: translateX(-150px);
-            }
-            to {
-                transform: translateX(150px);
-            }
+            from { transform: rotateY(-30deg) translateZ(-50px); }
+            to { transform: rotateY(30deg) translateZ(50px); }
         }
     </style>
 </head>
@@ -57,14 +51,22 @@
     <div id="ui"></div>
 
     <script>
-        // الجزء ده هو اللي بيصنع "القلب" عن طريق تكرار الكلمة 40 مرة
         const ui = document.getElementById('ui');
-        const numberOfWords = 40;
+        const numberOfWords = 60; // زودنا عدد الكلمات عشان القلب يكمل
 
         for (let i = 0; i < numberOfWords; i++) {
             const div = document.createElement('div');
             div.className = 'love_horizontal';
-            div.style.setProperty('--i', i); // بيدي كل كلمة رقم i مختلف عشان الـ delay
+            div.style.setProperty('--i', i);
+
+            // معادلة رسم القلب (X و Y)
+            const t = (i / numberOfWords) * 2 * Math.PI;
+            // معادلة القلب الرياضية
+            const x = 160 * Math.pow(Math.sin(t), 3);
+            const y = -(130 * Math.cos(t) - 50 * Math.cos(2*t) - 20 * Math.cos(3*t) - 10 * Math.cos(4*t));
+
+            div.style.left = `${x}px`;
+            div.style.top = `${y}px`;
 
             const span = document.createElement('span');
             span.className = 'love_word';
