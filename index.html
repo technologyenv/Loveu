@@ -3,186 +3,231 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أجمل نونو في الكون | من يوني 💖</title>
+    <title>إلى نونو بطل يوني 💖</title>
     <style>
-        /* التنسيق الأساسي للموقع */
+        :root {
+            --pink-bg: #ffe4e1;
+            --main-pink: #d81b60;
+            --soft-pink: #f06292;
+        }
+
         body {
-            background-color: #ffe4e1; /* بينك فاتح وراقي */
+            background-color: var(--pink-bg);
             margin: 0;
             padding: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Cairo', sans-serif;
             overflow-x: hidden;
-            min-height: 100vh;
+            scroll-behavior: smooth;
         }
 
-        /* حاوية القلب - ثابت والكلمات هي اللي بتتحرك */
-        #heart-container {
-            position: relative;
-            height: 450px;
-            width: 100%;
+        /* --- حاوية القلب الاحترافية (زي الفيديو) --- */
+        #heart-viewport {
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 20px;
+            perspective: 1000px;
+            width: 100%;
         }
 
         #ui {
             position: relative;
             transform-style: preserve-3d;
+            transform: rotateX(10deg);
         }
 
-        /* تنسيق الكلمات (نفس كود الصورة مع تعديل الحركة) */
         .love_word {
-            color: #d81b60; /* درجة بينك غامقة عشان تبان على الخلفية الفاتحة */
-            font-size: 1.2rem;
-            transform: translateY(-100%) rotateZ(-30deg);
-            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
-            letter-spacing: 2px;
-            white-space: nowrap;
             position: absolute;
+            color: var(--main-pink);
+            font-size: 1.1rem;
             font-weight: bold;
-            /* حركة الكلام داخل القلب */
-            animation: moveText 4000ms infinite linear;
+            white-space: nowrap;
+            text-shadow: 0 0 8px #fff;
+            /* حركة الدوران في المكان اللي شوفتيها في الفيديو */
+            animation: orbitalMove 4000ms infinite linear;
+            transform-origin: center;
         }
 
-        .love_horizontal {
-            position: absolute;
-            animation: floatHeart 5000ms infinite alternate ease-in-out;
-            animation-delay: calc(var(--i) * -200ms);
+        @keyframes orbitalMove {
+            0% { transform: translate(-50%, -50%) rotateY(0deg) translateZ(100px) rotateZ(-30deg); }
+            100% { transform: translate(-50%, -50%) rotateY(360deg) translateZ(100px) rotateZ(-30deg); }
         }
 
-        @keyframes moveText {
-            0% { transform: translateY(-100%) rotateZ(-30deg) rotateY(0deg); }
-            100% { transform: translateY(-100%) rotateZ(-30deg) rotateY(360deg); }
-        }
-
-        @keyframes floatHeart {
-            from { transform: translateZ(-20px) scale(0.95); }
-            to { transform: translateZ(50px) scale(1.05); }
-        }
-
-        /* حاوية الرسائل وتنسيق الفريمات الكريتيف */
-        .content-wrapper {
+        /* --- تنسيق الرسائل --- */
+        .content-section {
+            background: white;
+            width: 85%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(216, 27, 96, 0.1);
+            margin-bottom: 50px;
             text-align: center;
-            padding: 20px;
-            z-index: 10;
+            border: 3px solid var(--soft-pink);
         }
 
-        .main-title {
-            color: #ad1457;
-            font-size: 2rem;
-            margin-bottom: 5px;
-        }
+        .main-title { color: var(--main-pink); font-size: 2.2rem; }
+        .message-box { font-size: 1.3rem; line-height: 1.8; color: #444; }
 
-        .sub-title {
-            color: #ec407a;
-            font-size: 1.4rem;
-            margin-bottom: 25px;
-        }
-
-        /* فريم الكلام الحلو */
-        .message-frame {
-            background: rgba(255, 255, 255, 0.6);
-            border: 2px dashed #f06292;
-            padding: 30px;
-            border-radius: 50px 10px 50px 10px; /* شكل كريتيف */
-            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.1);
-            max-width: 500px;
-            margin: 20px auto;
+        /* --- منطقة الألعاب (لعبة شغف نونو) --- */
+        #game-container {
+            width: 90%;
+            max-width: 600px;
+            height: 400px;
+            background: #fff;
+            border: 4px solid var(--main-pink);
+            border-radius: 20px;
             position: relative;
-            animation: slideUp 1s ease-out;
+            overflow: hidden;
+            cursor: crosshair;
+            margin-bottom: 100px;
         }
 
-        .message-text {
-            color: #444;
+        .game-hint {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            color: var(--main-pink);
+        }
+
+        .game-score {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
             font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
+            color: var(--main-pink);
         }
 
-        /* قلوب صغيرة بتطير في الخلفية */
-        .floating-heart {
-            position: fixed;
-            color: #f06292;
-            font-size: 1.5rem;
+        .energy-heart {
+            position: absolute;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
             user-select: none;
-            pointer-events: none;
-            z-index: -1;
-            animation: fly 6s linear infinite;
         }
 
-        @keyframes fly {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        #energy-bar-container {
+            width: 80%;
+            height: 20px;
+            background: #eee;
+            border-radius: 10px;
+            margin: 20px auto;
+            border: 2px solid var(--main-pink);
         }
 
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        #energy-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--main-pink);
+            border-radius: 8px;
+            transition: width 0.3s;
         }
     </style>
 </head>
 <body>
 
-    <div id="heart-container">
+    <div id="heart-viewport">
         <div id="ui"></div>
-    </div>
-
-    <div class="content-wrapper">
-        <h1 class="main-title">إلى أجمل نونو في الكون 💖</h1>
-        <h2 class="sub-title">من يوني</h2>
-
-        <div class="message-frame">
-            <p class="message-text">أنا جمبك في كل الأوقات يا نونو وبحبك.</p>
-            <p class="message-text" style="font-weight: bold; color: #ad1457;">
-                عارفة إن الفترة دي صعبة عليك ومنطفي شوية، بس عايزة أقولك إن ضحكتك هي اللي بتنور دنيتي.. إنت مش بس حبيبي، إنت شغفي وطاقتي.
-            </p>
-            <p class="message-text">
-                ارتاح وخد وقتك، وأنا هستناك ترجع تنور من تاني زي ما عودتني، لأن العالم بيبقى باهت من غير روحك الحلوة يا بطل.
-            </p>
-            <div style="font-size: 1.5rem;">🌸✨💪</div>
+        <div style="position: absolute; bottom: 50px; color: var(--main-pink); font-weight: bold; animation: bounce 2s infinite;">
+            انزل تحت يا نونو وشوف يوني مجهزة لك إيه ✨
         </div>
     </div>
 
+    <div class="content-section">
+        <h1 class="main-title">إلى أجمل نونو في الكون 💖</h1>
+        <h3 style="color: var(--soft-pink);">من يوني</h3>
+        <div class="message-box">
+            <p>أنا جمبك في كل الأوقات يا نونو وبحبك.. عارفة إنك منطفي شوية اليومين دول، بس أنا هنا عشان أجمعلك كل طاقة الحب اللي في الدنيا وأرجعهالك تاني.</p>
+            <p>إنت شغفي، وإنت الروح اللي بتحلي أي مكان.. مفيش حاجة تستهل تطفيك يا بطل.</p>
+        </div>
+    </div>
+
+    <h2 style="color: var(--main-pink);">لعبة "ترجيح شغف نونو" 💪</h2>
+    <p>اضغط على القلوب اللي بتطلع عشان تملى "خزان الشغف" بتاعك!</p>
+    
+    <div id="energy-bar-container">
+        <div id="energy-fill"></div>
+    </div>
+
+    <div id="game-container">
+        <div class="game-hint">اجمع 20 قلب عشان يوني تديك بوسة!</div>
+        <div class="game-score">الشغف: <span id="score">0</span>%</div>
+    </div>
+
+    <div class="content-section">
+        <p style="font-weight: bold; font-size: 1.4rem;">كل قلب بتجمعه هو حتة من حبي ليك.. ارجع نور من تاني يا أغلى نونو.</p>
+    </div>
+
     <script>
-        // رسم القلب
+        // --- كود القلب الاحترافي (الكلام بيلف في مسار قلب) ---
         const ui = document.getElementById('ui');
-        const numberOfWords = 60;
+        const numberOfWords = 80;
 
         for (let i = 0; i < numberOfWords; i++) {
-            const div = document.createElement('div');
-            div.className = 'love_horizontal';
-            div.style.setProperty('--i', i);
-
+            const container = document.createElement('div');
+            container.style.position = 'absolute';
+            container.style.setProperty('--i', i);
+            
+            // معادلة القلب
             const t = (i / numberOfWords) * 2 * Math.PI;
             const x = 160 * Math.pow(Math.sin(t), 3);
             const y = -(130 * Math.cos(t) - 50 * Math.cos(2*t) - 20 * Math.cos(3*t) - 10 * Math.cos(4*t));
 
-            div.style.left = `${x}px`;
-            div.style.top = `${y}px`;
+            container.style.left = `${x}px`;
+            container.style.top = `${y}px`;
 
             const span = document.createElement('span');
             span.className = 'love_word';
             span.innerText = 'I love you';
+            // تأخير الحركة لكل كلمة عشان يعمل تتابع
+            span.style.animationDelay = `${(i * -100)}ms`;
 
-            div.appendChild(span);
-            ui.appendChild(div);
+            container.appendChild(span);
+            ui.appendChild(container);
         }
 
-        // إضافة قلوب طايرة في الخلفية عشان الموقع يكون "حيوي"
-        function createFloatingHeart() {
+        // --- كود اللعبة ---
+        const gameContainer = document.getElementById('game-container');
+        const scoreElement = document.getElementById('score');
+        const energyFill = document.getElementById('energy-fill');
+        let score = 0;
+
+        function createHeart() {
+            if (score >= 100) return;
             const heart = document.createElement('div');
-            heart.className = 'floating-heart';
-            heart.innerHTML = '💗';
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            document.body.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+            heart.className = 'energy-heart';
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 80 + 10 + '%';
+            heart.style.top = Math.random() * 80 + 10 + '%';
+            
+            heart.onclick = () => {
+                score += 5;
+                scoreElement.innerText = score;
+                energyFill.style.width = score + '%';
+                heart.style.transform = 'scale(0)';
+                setTimeout(() => heart.remove(), 200);
+                
+                if(score === 100) {
+                    alert('شغفك رجع يا نونو! يوني بتقولك بحبك ومستنياك تنور دنيتنا تاني 💖');
+                }
+            };
+
+            gameContainer.appendChild(heart);
+            setTimeout(() => { if(heart) heart.remove(); }, 2000);
         }
-        setInterval(createFloatingHeart, 500);
+
+        setInterval(createHeart, 800);
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
     </script>
 </body>
 </html>
