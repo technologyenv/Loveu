@@ -1,40 +1,78 @@
-body {
-  background-color: #000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100-vh;
-  overflow: hidden;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Animation</title>
+    <style>
+        /* التنسيق الأساسي للشاشة */
+        body {
+            background-color: #000; /* خلفية سوداء زي الفيديو */
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
 
-#ui .love_word {
-  color: #ea80b0;
-  font-size: 1.4rem;
-  transform: translateY(-100%) rotateZ(-30deg);
-  text-shadow: 0 0 10px #fff;
-  letter-spacing: 2px;
-  white-space: nowrap;
-  position: absolute;
-}
+        #ui {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
 
-#ui .love_horizontal {
-  animation: horizontal 10000ms infinite alternate ease-in-out;
-  animation-delay: calc(var(--i) * -300ms);
-}
+        /* الكود اللي كان في الصورة بالظبط */
+        #ui .love_word {
+            color: #ea80b0;
+            font-size: 1.4rem;
+            transform: translateY(-100%) rotateZ(-30deg);
+            text-shadow: 0 0 10px #fff;
+            letter-spacing: 2px;
+            white-space: nowrap;
+            position: absolute; /* مهم جداً عشان الكلمات تترص فوق بعض */
+        }
 
-/* دي الحركة اللي بتخلي الكلمات تتحرك وتعمل شكل القلب */
-@keyframes horizontal {
-  from { transform: translateX(-100px); }
-  to { transform: translateX(100px); }
-}
-<div id="ui">
-  <div class="love_horizontal" style="--i: 1">
-    <span class="love_word">I love you</span>
-  </div>
-  <div class="love_horizontal" style="--i: 2">
-    <span class="love_word">I love you</span>
-  </div>
-  <div class="love_horizontal" style="--i: 3">
-    <span class="love_word">I love you</span>
-  </div>
-  </div>
+        #ui .love_horizontal {
+            position: absolute;
+            animation: horizontal 10000ms infinite alternate ease-in-out;
+            animation-delay: calc(var(--i) * -300ms);
+        }
+
+        /* إضافة الحركة (Keyframes) اللي بتخلي الكلمات تتحرك */
+        @keyframes horizontal {
+            from {
+                transform: translateX(-150px);
+            }
+            to {
+                transform: translateX(150px);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="ui"></div>
+
+    <script>
+        // الجزء ده هو اللي بيصنع "القلب" عن طريق تكرار الكلمة 40 مرة
+        const ui = document.getElementById('ui');
+        const numberOfWords = 40;
+
+        for (let i = 0; i < numberOfWords; i++) {
+            const div = document.createElement('div');
+            div.className = 'love_horizontal';
+            div.style.setProperty('--i', i); // بيدي كل كلمة رقم i مختلف عشان الـ delay
+
+            const span = document.createElement('span');
+            span.className = 'love_word';
+            span.innerText = 'I love you';
+
+            div.appendChild(span);
+            ui.appendChild(div);
+        }
+    </script>
+</body>
+</html>
