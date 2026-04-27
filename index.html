@@ -1,255 +1,398 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى نونو عالمي الخاص | من يوني 💖</title>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>إلى نونو عالمي الخاص | من يوني 💖</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap');
 
-        :root {
-            --pink-bg: #ffe4e1;
-            --dark-pink: #ad1457;
-            --bright-pink: #f06292;
-        }
+    :root{
+      --bg1:#ffe4e1;
+      --bg2:#fff7fb;
+      --card:#ffffffcc;
+      --pink:#f06292;
+      --deep:#ad1457;
+      --soft:#ffd1e1;
+      --line:#ff9cbc;
+      --text:#5a1230;
+      --shadow:0 18px 45px rgba(173,20,87,.12);
+    }
 
-        body {
-            background-color: var(--pink-bg);
-            margin: 0;
-            font-family: 'Cairo', sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Cairo',sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at top, #fff 0%, var(--bg2) 35%, var(--bg1) 100%);
+      overflow-x:hidden;
+    }
 
-        /* --- 1. قسم القلب (ثابت ومنفصل) --- */
-        #heart-viewport {
-            height: 100vh;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            perspective: 1000px;
-            position: relative;
-            background: radial-gradient(circle, #fff0f5 0%, #ffe4e1 100%);
-        }
+    body::before,
+    body::after{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-2;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(240,98,146,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 30%, rgba(240,98,146,.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 40% 70%, rgba(240,98,146,.06) 0 2px, transparent 3px);
+      background-size:220px 220px;
+      animation: drift 18s linear infinite;
+      opacity:.7;
+    }
 
-        .heart-base {
-            position: relative;
-            transform-style: preserve-3d;
-        }
+    body::after{
+      animation-duration: 28s;
+      opacity:.45;
+      transform: scale(1.15);
+    }
 
-        .love_word {
-            position: absolute;
-            color: var(--dark-pink);
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-shadow: 0 0 5px #fff;
-            animation: heartOrbit 5s infinite linear;
-            white-space: nowrap;
-        }
+    @keyframes drift{
+      from{transform:translateY(0)}
+      to{transform:translateY(-120px)}
+    }
 
-        @keyframes heartOrbit {
-            0% { transform: translate(-50%, -50%) rotateY(0deg) translateZ(150px) rotateZ(-20deg); }
-            100% { transform: translate(-50%, -50%) rotateY(360deg) translateZ(150px) rotateZ(-20deg); }
-        }
+    #hero{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      padding:32px 16px;
+      position:relative;
+      overflow:hidden;
+    }
 
-        /* --- 2. تنسيق البطاقات (Cards) --- */
-        .card {
-            background: white;
-            width: 85%;
-            max-width: 600px;
-            padding: 30px;
-            border-radius: 30px;
-            box-shadow: 0 10px 30px rgba(173, 20, 87, 0.1);
-            margin: 40px 0;
-            text-align: center;
-            border: 2px solid var(--bright-pink);
-            position: relative;
-            animation: fadeIn 1s ease-in;
-        }
+    .hero-box{
+      width:min(920px, 92vw);
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:24px;
+      align-items:center;
+      justify-items:center;
+    }
 
-        .sticker { font-size: 3rem; margin-bottom: 15px; display: block; }
-        
-        /* --- 3. اللعبة الأولى: تجميع الشغف --- */
-        #game-board {
-            width: 100%;
-            height: 250px;
-            background: #fffafa;
-            border-radius: 20px;
-            position: relative;
-            overflow: hidden;
-            border: 2px dashed var(--bright-pink);
-            margin-top: 15px;
-        }
+    .heart-wrap{
+      width:min(560px, 92vw);
+      height:min(560px, 92vw);
+      max-height:560px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      margin:auto;
+    }
 
-        .collect-heart {
-            position: absolute;
-            font-size: 2rem;
-            cursor: pointer;
-            animation: pop 0.5s ease;
-        }
+    .heart-static{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:clamp(12rem, 24vw, 20rem);
+      filter: drop-shadow(0 15px 40px rgba(240,98,146,.25));
+      transform-origin:center;
+      animation: pulse 2.8s ease-in-out infinite;
+      z-index:1;
+      user-select:none;
+    }
 
-        /* --- 4. اللعبة الثانية: صندوق المفاجآت --- */
-        #gift-btn {
-            font-size: 4rem;
-            cursor: pointer;
-            transition: transform 0.3s;
-        }
-        #gift-btn:hover { transform: scale(1.2) rotate(15deg); }
+    @keyframes pulse{
+      0%,100%{transform:scale(1)}
+      50%{transform:scale(1.07)}
+    }
 
-        /* --- 5. اللعبة الثالثة: كلمة السر --- */
-        #secret-input {
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid var(--bright-pink);
-            text-align: center;
-            margin-top: 10px;
-        }
+    .heart-text-layer{
+      position:absolute;
+      inset:0;
+      z-index:2;
+      pointer-events:none;
+    }
 
-        /* --- حركات الخلفية --- */
-        .bg-heart {
-            position: fixed;
-            color: rgba(240, 98, 146, 0.2);
-            z-index: -1;
-            pointer-events: none;
-            animation: float 10s infinite linear;
-        }
+    .love_word{
+      position:absolute;
+      left:50%;
+      top:50%;
+      color:var(--deep);
+      font-weight:800;
+      font-size:1rem;
+      white-space:nowrap;
+      text-shadow:0 0 6px rgba(255,255,255,.9);
+      animation: orbit 6s linear infinite;
+      transform-origin:center;
+    }
 
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); }
-            100% { transform: translateY(-10vh) rotate(360deg); }
-        }
+    @keyframes orbit{
+      0%{transform:translate(-50%,-50%) rotate(0deg) translateX(150px) rotate(0deg)}
+      100%{transform:translate(-50%,-50%) rotate(360deg) translateX(150px) rotate(-360deg)}
+    }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-    </style>
+    .hero-title{
+      text-align:center;
+      padding:18px 22px;
+      border-radius:28px;
+      background:rgba(255,255,255,.68);
+      backdrop-filter: blur(10px);
+      box-shadow:var(--shadow);
+      border:1px solid rgba(240,98,146,.25);
+      width:min(720px, 92vw);
+    }
+
+    .hero-title h1{
+      margin:0 0 8px;
+      color:var(--deep);
+      font-size:clamp(1.5rem, 3.2vw, 2.4rem);
+      line-height:1.4;
+    }
+
+    .hero-title p{
+      margin:0;
+      color:#7b2b4e;
+      font-size:clamp(1rem, 2vw, 1.15rem);
+    }
+
+    .scroll-tip{
+      margin-top:18px;
+      color:var(--deep);
+      font-weight:700;
+      animation:bounce 1.6s infinite;
+      text-align:center;
+    }
+
+    @keyframes bounce{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(8px)}
+    }
+
+    .page{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:24px;
+      padding:0 16px 40px;
+    }
+
+    .card{
+      width:min(760px, 92vw);
+      background:rgba(255,255,255,.78);
+      backdrop-filter: blur(10px);
+      border:1px solid rgba(240,98,146,.2);
+      box-shadow:var(--shadow);
+      border-radius:28px;
+      padding:26px 22px;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      animation: fadeIn .8s ease both;
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:auto -20% -65% auto;
+      width:220px;
+      height:220px;
+      background:radial-gradient(circle, rgba(240,98,146,.12), transparent 65%);
+      border-radius:50%;
+    }
+
+    @keyframes fadeIn{
+      from{opacity:0; transform:translateY(22px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    .sticker{
+      display:inline-block;
+      font-size:2.8rem;
+      margin-bottom:10px;
+      filter: drop-shadow(0 8px 18px rgba(240,98,146,.18));
+    }
+
+    .card h2, .card h1, .card h3, .card p{
+      position:relative;
+      z-index:1;
+    }
+
+    .card h2{
+      margin:0 0 8px;
+      color:var(--deep);
+      font-size:1.5rem;
+    }
+
+    .card p{
+      margin:8px 0 0;
+      line-height:1.9;
+      font-size:1.05rem;
+    }
+
+    .accent-card{
+      background:linear-gradient(135deg, #ff6fa4 0%, #f06292 100%);
+      color:white;
+      border:none;
+    }
+
+    .accent-card p{color:white}
+
+    .game-box{
+      margin-top:14px;
+      background:linear-gradient(180deg, #fff7fb 0%, #fff 100%);
+      border:2px dashed var(--line);
+      border-radius:22px;
+      padding:16px;
+      min-height:260px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .score{
+      margin-top:10px;
+      font-weight:800;
+      color:var(--deep);
+    }
+
+    .btn{
+      border:none;
+      background:linear-gradient(135deg, var(--pink), var(--deep));
+      color:#fff;
+      padding:12px 18px;
+      border-radius:16px;
+      cursor:pointer;
+      font-family:inherit;
+      font-weight:800;
+      box-shadow:0 12px 25px rgba(173,20,87,.2);
+      transition:.25s ease;
+    }
+
+    .btn:hover{
+      transform:translateY(-2px) scale(1.02);
+    }
+
+    .collect-heart,
+    .magic-gift,
+    .floating-heart{
+      position:absolute;
+      user-select:none;
+    }
+
+    .collect-heart{
+      font-size:2rem;
+      cursor:pointer;
+      animation:pop .35s ease;
+    }
+
+    @keyframes pop{
+      from{transform:scale(.3); opacity:.2}
+      to{transform:scale(1); opacity:1}
+    }
+
+    .floating-heart{
+      color:rgba(240,98,146,.18);
+      z-index:-1;
+      pointer-events:none;
+      animation: float 12s linear infinite;
+    }
+
+    @keyframes float{
+      from{transform:translateY(110vh) rotate(0deg)}
+      to{transform:translateY(-15vh) rotate(360deg)}
+    }
+
+    input{
+      width:min(320px, 90%);
+      padding:12px 14px;
+      border-radius:14px;
+      border:2px solid var(--line);
+      outline:none;
+      font-family:inherit;
+      text-align:center;
+      font-size:1rem;
+      margin-top:10px;
+      background:white;
+    }
+
+    input:focus{
+      border-color:var(--pink);
+      box-shadow:0 0 0 4px rgba(240,98,146,.12);
+    }
+
+    .secret{
+      display:none;
+      margin-top:16px;
+      padding:14px;
+      border-radius:18px;
+      background:#fff0f6;
+      color:var(--deep);
+      font-weight:800;
+      line-height:1.9;
+    }
+
+    .gift-emoji{
+      font-size:4rem;
+      cursor:pointer;
+      display:inline-block;
+      transition:.25s ease;
+      filter: drop-shadow(0 10px 20px rgba(173,20,87,.18));
+    }
+
+    .gift-emoji:hover{
+      transform:scale(1.15) rotate(10deg);
+    }
+
+    .mini-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap:14px;
+      margin-top:16px;
+    }
+
+    .mini{
+      border-radius:20px;
+      padding:16px;
+      background:#fff8fc;
+      border:1px solid rgba(240,98,146,.16);
+      min-height:120px;
+    }
+
+    .mini strong{
+      display:block;
+      color:var(--deep);
+      margin-bottom:8px;
+    }
+
+    @media (max-width:720px){
+      .mini-grid{grid-template-columns:1fr}
+      .heart-wrap{height:420px}
+      .love_word{font-size:.9rem}
+      .card{padding:22px 16px}
+      .game-box{min-height:230px}
+    }
+  </style>
 </head>
 <body>
 
-    <div id="heart-viewport">
-        <div class="heart-base" id="ui"></div>
-        <div style="position: absolute; bottom: 40px; font-weight: bold; color: var(--dark-pink);">
-            انزل لأسفل لاكتشاف عالم نونو ✨
-        </div>
+  <section id="hero">
+    <div class="hero-box">
+      <div class="heart-wrap">
+        <div class="heart-static">💖</div>
+        <div class="heart-text-layer" id="heartTextLayer"></div>
+      </div>
+
+      <div class="hero-title">
+        <h1>إلى نونو العالمي الخاص 💗</h1>
+        <p>من يوني، بكل الحب اللي في الدنيا كلها.. إنت مش لوحدك أبدًا.</p>
+      </div>
     </div>
+    <div class="scroll-tip">انزل لتحت عشان تكتشف المفاجآت ✨</div>
+  </section>
 
-    <div class="card">
-        <span class="sticker">👑</span>
-        <h1 style="color: var(--dark-pink); margin: 0;">إلى أجمل نونو في الكون</h1>
-        <h3 style="color: var(--bright-pink);">من يوني 💖</h3>
-        <p>أنا هنا عشان أقولك إنك أغلى حاجة في حياتي، وإن انطفاءك ده مجرد سحابة وهتعدي.. أنا جنبك وبحبك يا بطل قلبي.</p>
-    </div>
+  <main class="page">
 
-    <div class="card">
-        <span class="sticker">🎮</span>
-        <h2 style="color: var(--dark-pink);">لعبة إرجاع الشغف</h2>
-        <p>فرقع القلوب بسرعة عشان نملى خزان طاقتك!</p>
-        <div id="score-text">مستوى الشغف: 0%</div>
-        <div id="game-board"></div>
-    </div>
-
-    <div class="card" style="background: var(--bright-pink); color: white;">
-        <span class="sticker">✨</span>
-        <p style="font-size: 1.2rem; font-weight: bold;">"يا نونو، شغفك هو اللي بيخلي الدنيا لها لون.. ارتاح بس متبطلش تحاول، ويوني دايماً سندك."</p>
-    </div>
-
-    <div class="card">
-        <span class="sticker">🔒</span>
-        <h2 style="color: var(--dark-pink);">كلمة السر لرسالة سرية</h2>
-        <p>اكتب اسمك (نونو) عشان تشوف الرسالة</p>
-        <input type="text" id="secret-input" placeholder="اكتب هنا..." oninput="checkSecret()">
-        <div id="secret-msg" style="display: none; margin-top: 15px; font-weight: bold; color: var(--dark-pink);">
-            "إنت الشخص اللي مفيش منه اتنين، وبحبك في كل حالاتك.. ارجع نور يا عالمي."
-        </div>
-    </div>
-
-    <div class="card">
-        <span class="sticker">🎁</span>
-        <h2 style="color: var(--dark-pink);">هدية يوني ليك</h2>
-        <div id="gift-btn" onclick="revealGift()">🎁</div>
-        <div id="gift-content" style="display: none; margin-top: 15px;">
-            <p>أعدك أن أكون معك في كل خطوة.. 🧸💖</p>
-            <div style="font-size: 3rem;">🦄🍓🍭</div>
-        </div>
-    </div>
-
-    <p style="margin-bottom: 50px; color: var(--dark-pink); font-weight: bold;">بكل حب من يوني 🌸</p>
-
-    <script>
-        // 1. رسم القلب بدقة (الكلمات تتبع مسار قلب رياضي)
-        const ui = document.getElementById('ui');
-        const total = 70;
-        for (let i = 0; i < total; i++) {
-            const container = document.createElement('div');
-            container.style.position = 'absolute';
-            
-            const t = (i / total) * 2 * Math.PI;
-            // معادلة رسم القلب
-            const x = 160 * Math.pow(Math.sin(t), 3);
-            const y = -(130 * Math.cos(t) - 50 * Math.cos(2*t) - 20 * Math.cos(3*t) - 10 * Math.cos(4*t));
-            
-            container.style.left = `${x}px`;
-            container.style.top = `${y}px`;
-
-            const span = document.createElement('span');
-            span.className = 'love_word';
-            span.innerText = 'I love you';
-            span.style.animationDelay = `${(i * -150)}ms`;
-
-            container.appendChild(span);
-            ui.appendChild(container);
-        }
-
-        // 2. كود لعبة إرجاع الشغف
-        let score = 0;
-        const board = document.getElementById('game-board');
-        const scoreDisplay = document.getElementById('score-text');
-
-        function spawnHeart() {
-            if (score >= 100) return;
-            const h = document.createElement('div');
-            h.className = 'collect-heart';
-            h.innerHTML = '💖';
-            h.style.left = Math.random() * 85 + '%';
-            h.style.top = Math.random() * 80 + '%';
-            h.onclick = () => {
-                score += 10;
-                scoreDisplay.innerText = `مستوى الشغف: ${score}%`;
-                h.remove();
-                if(score === 100) scoreDisplay.innerText = "شغفك رجع كامل يا بطل! 😍";
-            }
-            board.appendChild(h);
-            setTimeout(() => h.remove(), 2000);
-        }
-        setInterval(spawnHeart, 1000);
-
-        // 3. كلمة السر
-        function checkSecret() {
-            const val = document.getElementById('secret-input').value;
-            if(val === 'نونو') {
-                document.getElementById('secret-msg').style.display = 'block';
-            }
-        }
-
-        // 4. الهدية
-        function revealGift() {
-            document.getElementById('gift-btn').innerHTML = '💝';
-            document.getElementById('gift-content').style.display = 'block';
-        }
-
-        // 5. قلوب الخلفية الطايرة
-        function addBgHeart() {
-            const bh = document.createElement('div');
-            bh.className = 'bg-heart';
-            bh.innerHTML = '🌸';
-            bh.style.left = Math.random() * 100 + 'vw';
-            bh.style.fontSize = Math.random() * 20 + 20 + 'px';
-            document.body.appendChild(bh);
-            setTimeout(() => bh.remove(), 10000);
-        }
-        setInterval(addBgHeart, 1500);
-    </script>
-</body>
-</html>
+    <section class="card">
+      <span class="sticker">👑</span>
+      <h2>لنونو اللي ملوش
