@@ -3,116 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى أغلى نونو في الدنيا | من يوني</title>
+    <title>إلى أجمل نونو في الكون | من يوني 💖</title>
     <style>
         /* التنسيق الأساسي للموقع */
         body {
-            background-color: #000;
+            background-color: #ffe4e1; /* بينك فاتح وراقي */
             margin: 0;
-            min-height: 100vh;
+            padding: 0;
             display: flex;
-            flex-direction: column; /* ترتيب القلب وتحته الكلام */
-            justify-content: flex-start; /* القلب يبدأ من فوق */
+            flex-direction: column;
             align-items: center;
-            overflow-x: hidden; /* منع التمرير الأفقي */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: #fff;
-            padding-top: 5vh; /* مسافة من فوق */
+            overflow-x: hidden;
+            min-height: 100vh;
         }
 
-        /* حاوية القلب */
+        /* حاوية القلب - ثابت والكلمات هي اللي بتتحرك */
         #heart-container {
-            perspective: 2000px;
             position: relative;
-            height: 60vh; /* مساحة القلب */
+            height: 450px;
             width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+            margin-top: 20px;
         }
 
         #ui {
             position: relative;
-            /* حركة دائرية للقلب كله (سريعة ومبهجة) */
-            animation: heartRoll 6000ms infinite linear; 
+            transform-style: preserve-3d;
         }
 
-        /* الكود اللي في صورتك مع التعديلات المطلوبة (الكلام بيلف) */
+        /* تنسيق الكلمات (نفس كود الصورة مع تعديل الحركة) */
         .love_word {
-            color: #ea80b0;
-            font-size: 1.1rem;
-            transform: translateY(-100%) rotateZ(-30deg); /* الوضع الأصلي */
-            text-shadow: 0 0 10px #fff;
-            letter-spacing: 1px;
+            color: #d81b60; /* درجة بينك غامقة عشان تبان على الخلفية الفاتحة */
+            font-size: 1.2rem;
+            transform: translateY(-100%) rotateZ(-30deg);
+            text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.8);
+            letter-spacing: 2px;
             white-space: nowrap;
             position: absolute;
             font-weight: bold;
-            opacity: 0.8;
-            /* حركة دوران الكلمة حوالين نفسها */
-            animation: wordSpin 4000ms infinite linear;
+            /* حركة الكلام داخل القلب */
+            animation: moveText 4000ms infinite linear;
         }
 
         .love_horizontal {
             position: absolute;
-            /* الحركة الأساسية (أسرع) */
-            animation: horizontal 6000ms infinite alternate ease-in-out;
-            animation-delay: calc(var(--i) * -150ms); /* تأخير أسرع */
+            animation: floatHeart 5000ms infinite alternate ease-in-out;
+            animation-delay: calc(var(--i) * -200ms);
         }
 
-        /* --- الحركات (Animations) --- */
-
-        /* حركة القلب المجسمة (أسرع) */
-        @keyframes horizontal {
-            from { transform: rotateY(-40deg) translateZ(-80px); }
-            to { transform: rotateY(40deg) translateZ(80px); }
-        }
-
-        /* حركة دوران القلب كله */
-        @keyframes heartRoll {
-            0% { transform: rotateY(0deg) rotateX(10deg); }
-            100% { transform: rotateY(360deg) rotateX(10deg); }
-        }
-
-        /* حركة دوران الكلمة حوالين نفسها */
-        @keyframes wordSpin {
+        @keyframes moveText {
             0% { transform: translateY(-100%) rotateZ(-30deg) rotateY(0deg); }
             100% { transform: translateY(-100%) rotateZ(-30deg) rotateY(360deg); }
         }
 
-        /* --- جزء الموقع الخاص بنونو (Messages Area) --- */
-        #messages-section {
-            width: 90%;
-            max-width: 600px;
+        @keyframes floatHeart {
+            from { transform: translateZ(-20px) scale(0.95); }
+            to { transform: translateZ(50px) scale(1.05); }
+        }
+
+        /* حاوية الرسائل وتنسيق الفريمات الكريتيف */
+        .content-wrapper {
             text-align: center;
             padding: 20px;
-            margin-bottom: 5vh;
-            border-top: 1px solid rgba(234, 128, 176, 0.3); /* خط خفيف لونه بمبي */
+            z-index: 10;
         }
 
-        h1 {
-            color: #fff;
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+        .main-title {
+            color: #ad1457;
+            font-size: 2rem;
+            margin-bottom: 5px;
         }
 
-        .yoni-mark {
-            color: #ea80b0; /* لون يوني */
-            font-size: 0.9rem;
-            opacity: 0.7;
-            margin-bottom: 20px;
+        .sub-title {
+            color: #ec407a;
+            font-size: 1.4rem;
+            margin-bottom: 25px;
         }
 
-        #dynamic-message {
-            font-size: 1.3rem;
-            line-height: 1.6;
-            color: #eee;
-            min-height: 80px; /* مسافة ثابتة عشان الصفحة متهزش */
-            transition: opacity 0.5s ease-in-out;
-            margin-top: 15px;
-            padding: 10px;
-            border-radius: 10px;
-            background-color: rgba(255, 255, 255, 0.05); /* خلفية خفيفة */
+        /* فريم الكلام الحلو */
+        .message-frame {
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px dashed #f06292;
+            padding: 30px;
+            border-radius: 50px 10px 50px 10px; /* شكل كريتيف */
+            box-shadow: 0 10px 20px rgba(216, 27, 96, 0.1);
+            max-width: 500px;
+            margin: 20px auto;
+            position: relative;
+            animation: slideUp 1s ease-out;
+        }
+
+        .message-text {
+            color: #444;
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        /* قلوب صغيرة بتطير في الخلفية */
+        .floating-heart {
+            position: fixed;
+            color: #f06292;
+            font-size: 1.5rem;
+            user-select: none;
+            pointer-events: none;
+            z-index: -1;
+            animation: fly 6s linear infinite;
+        }
+
+        @keyframes fly {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -122,27 +131,35 @@
         <div id="ui"></div>
     </div>
 
-    <div id="messages-section">
-        <h1>إلى أرجل نونو في الكون..</h1>
-        <div class="yoni-mark">من يوني ❤️</div>
-        
-        <div id="dynamic-message">كل حاجة هتبقى تمام يا بطل، أنا هنا جنبك.</div>
+    <div class="content-wrapper">
+        <h1 class="main-title">إلى أجمل نونو في الكون 💖</h1>
+        <h2 class="sub-title">من يوني</h2>
+
+        <div class="message-frame">
+            <p class="message-text">أنا جمبك في كل الأوقات يا نونو وبحبك.</p>
+            <p class="message-text" style="font-weight: bold; color: #ad1457;">
+                عارفة إن الفترة دي صعبة عليك ومنطفي شوية، بس عايزة أقولك إن ضحكتك هي اللي بتنور دنيتي.. إنت مش بس حبيبي، إنت شغفي وطاقتي.
+            </p>
+            <p class="message-text">
+                ارتاح وخد وقتك، وأنا هستناك ترجع تنور من تاني زي ما عودتني، لأن العالم بيبقى باهت من غير روحك الحلوة يا بطل.
+            </p>
+            <div style="font-size: 1.5rem;">🌸✨💪</div>
+        </div>
     </div>
 
     <script>
-        // --- أولاً: كود رسم القلب (نفسه مع زيادة العدد) ---
+        // رسم القلب
         const ui = document.getElementById('ui');
-        const numberOfWords = 70; // كلمات أكتر عشان القلب يبان مليان
+        const numberOfWords = 60;
 
         for (let i = 0; i < numberOfWords; i++) {
             const div = document.createElement('div');
             div.className = 'love_horizontal';
             div.style.setProperty('--i', i);
 
-            // معادلة القلب الرياضية (توزيع راسي وأفقي)
             const t = (i / numberOfWords) * 2 * Math.PI;
-            const x = 180 * Math.pow(Math.sin(t), 3);
-            const y = -(150 * Math.cos(t) - 60 * Math.cos(2*t) - 25 * Math.cos(3*t) - 10 * Math.cos(4*t));
+            const x = 160 * Math.pow(Math.sin(t), 3);
+            const y = -(130 * Math.cos(t) - 50 * Math.cos(2*t) - 20 * Math.cos(3*t) - 10 * Math.cos(4*t));
 
             div.style.left = `${x}px`;
             div.style.top = `${y}px`;
@@ -155,30 +172,17 @@
             ui.appendChild(div);
         }
 
-        // --- ثانياً: كود رسائل نونو المتغيرة ---
-        const messages = [
-            "أنا عارف إنك تعبان، بس افتكر إنك أقوى مما تتخيل.. وإني بحبك.",
-            "الشغف هيرجع، بس محتاجك ترتاح شوية. الدنيا مطارتش، وأنا جنبك.",
-            "نونو يا بطل.. المطفي هينور تاني، إنت النور بتاعي.",
-            "يوني بتحبك بجد، وكل حاجة هتبقى تمام طول ما إحنا سوا.",
-            "ارتاح النهاردة عشان بكرة هنرجع نحلم سوا.",
-            "مفيش حاجة تستهل تطفيك، إنت غالي أوي."
-        ];
-
-        let messageIndex = 0;
-        const messageElement = document.getElementById('dynamic-message');
-
-        function changeMessage() {
-            messageElement.style.opacity = 0; // إخفاء الرسالة الحالية ببطء
-            setTimeout(() => {
-                messageIndex = (messageIndex + 1) % messages.length;
-                messageElement.innerText = messages[messageIndex];
-                messageElement.style.opacity = 1; // إظهار الرسالة الجديدة ببطء
-            }, 500); // نص ثانية إخفاء
+        // إضافة قلوب طايرة في الخلفية عشان الموقع يكون "حيوي"
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'floating-heart';
+            heart.innerHTML = '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
         }
-
-        // تغيير الرسالة كل 5 ثواني
-        setInterval(changeMessage, 5000);
+        setInterval(createFloatingHeart, 500);
     </script>
 </body>
 </html>
