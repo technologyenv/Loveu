@@ -25,18 +25,19 @@
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;text-align:center}
     .heart-stage{width:min(660px,92vw);height:min(660px,92vw);position:relative;display:grid;place-items:center;margin-bottom:18px;transform:translateZ(0)}
     .orbit-layer{position:absolute;inset:0;z-index:2;pointer-events:none;isolation:isolate}
+    
     .orbit-word{position:absolute;left:50%;top:50%;color:var(--deep);font-weight:800;font-size:clamp(.78rem,1.05vw,.98rem);white-space:nowrap;text-shadow:0 0 8px rgba(255,255,255,.98);will-change:transform;animation:spin 18s linear infinite}
     @keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
     
     .hero-text{width:min(820px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,248,252,.8));backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:28px;padding:22px 20px;box-shadow:var(--shadow)}
     .hero-text h1{margin:0 0 8px;color:var(--deep);font-size:clamp(1.6rem,3vw,2.45rem);line-height:1.5}.hero-text p{margin:0;line-height:1.95;font-size:1.05rem}
-    .hint{margin-top:18px;color:var(--deep);font-weight:800;animation:bounce 1.5s infinite}
+    .hint{margin-top:18px;color:var(--deep);font-weight:800;animation:bounce 1.5s infinite}.hint span{display:inline-block}
     @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
     
     .page{width:100%;display:flex;flex-direction:column;align-items:center;gap:22px;padding:0 16px 42px}
     .card{width:min(820px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,248,252,.78));backdrop-filter:blur(12px);border:1px solid rgba(240,98,146,.18);border-radius:28px;box-shadow:var(--shadow);padding:24px 20px;text-align:center;position:relative;overflow:hidden}
-    .sticker{font-size:2.5rem;display:inline-block;margin-bottom:8px}.card h2{margin:0 0 8px;color:var(--deep);font-size:1.45rem}
-    .accent{background:linear-gradient(135deg,#ff6fa4,#f06292);color:#fff;border:none}
+    .sticker{font-size:2.5rem;display:inline-block;margin-bottom:8px}.card h2{margin:0 0 8px;color:var(--deep);font-size:1.45rem}.card p{margin:8px 0 0;line-height:1.9;font-size:1.04rem}
+    .accent{background:linear-gradient(135deg,#ff6fa4,#f06292);color:#fff;border:none}.accent h2,.accent p{color:#fff}
     
     .game-box{margin-top:14px;min-height:260px;background:linear-gradient(180deg,#fff8fc,#fff);border:2px dashed rgba(240,98,146,.35);border-radius:22px;position:relative;overflow:hidden}
     .score{margin-top:10px;color:var(--deep);font-weight:800}.collect-heart{position:absolute;font-size:2rem;cursor:pointer;animation:pop .3s ease;user-select:none}
@@ -44,14 +45,15 @@
     input{width:min(340px,92%);margin-top:12px;padding:12px 14px;border-radius:14px;border:2px solid rgba(240,98,146,.35);outline:none;text-align:center;font-family:inherit;font-size:1rem;background:#fff}
     .secret{display:none;margin-top:14px;padding:14px;border-radius:18px;background:#fff0f6;color:var(--deep);font-weight:800;line-height:1.9}
     .gift{font-size:4rem;cursor:pointer;display:inline-block;transition:.2s ease;user-select:none}
-    .powerbar{width:min(520px,88vw);height:14px;border-radius:999px;background:#ffe3ef;overflow:hidden;margin:12px auto 0}.powerbar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff95b9,#ad1457);border-radius:999px;transition:width .25s ease}
     .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.mini{background:#fff8fc;border:1px solid rgba(240,98,146,.15);border-radius:20px;padding:16px;min-height:110px}
+    .powerbar{width:min(520px,88vw);height:14px;border-radius:999px;background:#ffe3ef;overflow:hidden;margin:12px auto 0;box-shadow:inset 0 0 0 1px rgba(173,20,87,.08)} .powerbar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff95b9,#ad1457);border-radius:999px;transition:width .25s ease}
+    
     @media (max-width:720px){.mini-grid{grid-template-columns:1fr}}
   </style>
 </head>
 <body>
 
-  <audio id="bgMusic" loop>
+  <audio id="bgMusic" loop preload="auto">
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
@@ -70,8 +72,9 @@
     </div>
     <div class="hero-text">
       <h1>إلى نونو الغالي من يوني 💖</h1>
-      <p>إنت أغلى شخص وأحن قلب، ويوني عاملة الموقع ده مخصوص عشانك.</p>
+      <p>إنت أغلى شخص وأحن قلب، ويوني عاملة الموقع ده من حبها ليك علشان تفكرك إنك مهم جدًا ومش لوحدك أبدًا.</p>
     </div>
+    <div class="hint"><span>انزل لتحت عشان تلاقي المفاجآت ✨</span></div>
   </section>
 
   <main class="page">
@@ -79,15 +82,18 @@
       <span class="sticker">👑</span>
       <h2>لنونو اللي محدش بيشبهه</h2>
       <p>إنت مش بس غالي، إنت راحة للقلب. وجودك بيطمن، وابتسامتك بتفرق، وروحك ليها قيمة كبيرة.</p>
+      <p>يوني بتحبك وبتفخر بيك، وبتقولك: خليك مطمن، إنت ماشي صح حتى لو الطريق متعب شوية.</p>
     </section>
 
     <section class="card accent">
+      <span class="sticker">✨</span>
       <p style="font-size:1.15rem;font-weight:800;">"يا نونو، إنت مش لوحدك أبدًا.. خُد نفس وارتاح شوية، وأنا جنبك في كل خطوة."</p>
     </section>
 
     <section class="card">
       <span class="sticker">🎮</span>
       <h2>لعبة فرقع الشغف</h2>
+      <p>اضغط على القلوب قبل ما تختفي عشان تزود الطاقة.</p>
       <div class="score" id="scoreText">مستوى الشغف: 0%</div>
       <div class="powerbar"><span id="powerFill"></span></div>
       <div class="game-box" id="gameBoard"></div>
@@ -104,6 +110,7 @@
     <section class="card">
       <span class="sticker">🎁</span>
       <h2>هدية من يوني</h2>
+      <p>اضغط على الهدية وشوف المفاجأة.</p>
       <div class="gift" id="giftBtn">🎁</div>
       <div class="secret" id="giftContent">أنت تستاهل أيام أخف، وراحة أكتر، وكل حب الدنيا 💖</div>
     </section>
@@ -118,6 +125,7 @@
         <div class="mini"><strong>رسالة 4</strong><span>يوني دايمًا معاك، في التعب، في الهدوء، وفي كل بداية جديدة.</span></div>
       </div>
     </section>
+    <p style="margin:6px 0 30px;color:var(--deep);font-weight:800;">بكل حب من يوني لنونو 🌷</p>
   </main>
 
   <script>
@@ -125,40 +133,30 @@
     const startOverlay = document.getElementById('startOverlay');
     const startBtn = document.getElementById('startBtn');
 
-    // كود التشغيل "الحديدي"
+    // تشغيل فوري وبدون انتظار
     startBtn.onclick = function() {
-      // إخفاء فوري
+      music.play();
       startOverlay.style.opacity = '0';
       startOverlay.style.pointerEvents = 'none';
-      
-      // تشغيل إجباري وتحميل في نفس اللحظة
-      music.load();
-      music.play().then(() => {
-        console.log("Music started!");
-      }).catch(err => {
-        // محاولة ثانية لو المتصفح اعترض
-        music.play();
-      });
-
       setTimeout(() => startOverlay.remove(), 300);
     };
 
-    // القلب الكثيف
     const orbitLayer = document.getElementById('orbitLayer');
-    for(let i=0; i<220; i++){
-      const t = (i / 220) * Math.PI * 2;
+    const count = 220;
+    const W = 320; const H = 300;
+    for(let i=0; i<count; i++){
+      const t = (i / count) * Math.PI * 2;
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
       const s = document.createElement('span');
       s.className = 'orbit-word';
       s.textContent = 'I love you';
-      s.style.left = `calc(50% + ${(x * 10)}px)`;
-      s.style.top = `calc(50% + ${(y * 10)}px)`;
-      s.style.animationDelay = `${-(i * 0.05)}s`;
+      s.style.left = `calc(50% + ${(x / 16) * (W * 0.46)}px)`;
+      s.style.top = `calc(50% + ${(y / 17) * (H * 0.44)}px)`;
+      s.style.animationDelay = `${-(i * 0.022)}s`;
       orbitLayer.appendChild(s);
     }
 
-    // اللعبة (تصليح الـ 10% والـ 20%)
     const gameBoard = document.getElementById('gameBoard');
     const scoreLabel = document.getElementById('scoreText');
     const bar = document.getElementById('powerFill');
@@ -176,10 +174,9 @@
         scoreLabel.textContent = score >= 100 ? 'شغف نونو رجع كامل! 😍' : `مستوى الشغف: ${score}%`;
         h.remove(); 
       };
-      setTimeout(() => { if(h.parentNode) h.remove(); }, 1500);
-    }, 850);
+      setTimeout(() => { if(h.parentNode) h.remove(); }, 1800);
+    }, 800);
 
-    // الأسرار
     document.getElementById('secretInput').oninput = (e) => {
       document.getElementById('secretMsg').style.display = e.target.value.trim() === 'نونو' ? 'block' : 'none';
     };
@@ -188,7 +185,6 @@
       document.getElementById('giftContent').style.display = 'block';
     };
 
-    // الخلفية
     const bg = document.getElementById('bgLayer');
     for(let i=0; i<10; i++) {
       const b = document.createElement('div');
