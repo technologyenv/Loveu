@@ -8,19 +8,17 @@
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap');
     :root{--bg1:#ffe6ee;--bg2:#fff8fc;--card:rgba(255,255,255,.8);--pink:#f06292;--deep:#ad1457;--line:rgba(240,98,146,.22);--text:#5c1731;--shadow:0 18px 46px rgba(173,20,87,.12)}
     *{box-sizing:border-box} 
-    html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;scroll-behavior:auto !important} /* تسريع السكرول */
+    html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;scroll-behavior:auto !important}
     body{font-family:'Cairo',sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0%,var(--bg2) 34%,var(--bg1) 100%);position:relative}
     
-    /* خلفية تفاعلية سريعة */
     .bg-layer{position:fixed;inset:0;pointer-events:none;z-index:-2;overflow:hidden}
-    .bg-heart{position:absolute;color:rgba(240,98,146,.15);animation:float 8s linear infinite;will-change:transform;user-select:none}
+    .bg-heart{position:absolute;color:rgba(240,98,146,-15);animation:float 8s linear infinite;will-change:transform;user-select:none}
     @keyframes float{from{transform:translateY(110vh) rotate(0deg)}to{transform:translateY(-15vh) rotate(360deg)}}
     
     .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;text-align:center}
     .heart-stage{width:min(660px,92vw);height:min(660px,92vw);position:relative;display:grid;place-items:center;margin-bottom:18px;transform:translateZ(0)}
     .orbit-layer{position:absolute;inset:0;z-index:2;pointer-events:none;isolation:isolate}
     
-    /* تسريع دوران كلمات الحب */
     .orbit-word{position:absolute;left:50%;top:50%;color:var(--deep);font-weight:800;font-size:clamp(.78rem,1.05vw,.98rem);white-space:nowrap;text-shadow:0 0 8px rgba(255,255,255,.98);will-change:transform;animation:spin 10s linear infinite}
     @keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
     
@@ -33,7 +31,6 @@
     
     .page{width:100%;display:flex;flex-direction:column;align-items:center;gap:22px;padding:0 16px 42px}
     
-    /* تأثيرات حركية للكروت */
     .card{width:min(820px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,248,252,.78));backdrop-filter:blur(12px);border:1px solid rgba(240,98,146,.18);border-radius:28px;box-shadow:var(--shadow);padding:24px 20px;text-align:center;position:relative;overflow:hidden;transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275)}
     .card:hover{transform: translateY(-5px)}
     
@@ -53,14 +50,22 @@
     .mini strong{display:block;color:var(--deep);margin-bottom:8px}.line{margin-top:12px;font-weight:800;color:var(--deep)}
     .powerbar{width:min(520px,88vw);height:14px;border-radius:999px;background:#ffe3ef;overflow:hidden;margin:12px auto 0;box-shadow:inset 0 0 0 1px rgba(173,20,87,.08)} .powerbar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff95b9,#ad1457);border-radius:999px;transition:width .25s ease}
 
-    /* ميزة جديدة: ذيل الفأرة السحري */
     .trail { position: fixed; pointer-events: none; width: 10px; height: 10px; background: var(--pink); border-radius: 50%; z-index: 9999; animation: trailAnim 0.8s forwards; }
     @keyframes trailAnim { to { transform: scale(2); opacity: 0; } }
 
     @media (max-width:720px){.mini-grid{grid-template-columns:1fr}.heart-stage{width:min(480px,92vw);height:min(480px,92vw)}.orbit-word{font-size:.72rem}}
+    
+    /* زر التحكم في الصوت (اختياري بس كريتيف) */
+    .music-control { position: fixed; bottom: 20px; left: 20px; z-index: 1000; background: white; border-radius: 50%; width: 45px; height: 45px; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow); cursor: pointer; font-size: 1.2rem; border: 1px solid var(--line); }
   </style>
 </head>
 <body>
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="music-control" id="musicToggle" title="تشغيل/إيقاف الموسيقى">🎵</div>
+
   <div class="bg-layer" id="bgLayer"></div>
   <section class="hero">
     <div class="heart-stage" aria-label="heart animation">
@@ -72,6 +77,7 @@
     </div>
     <div class="hint"><span>انزل لتحت عشان تلاقي المفاجآت ✨</span></div>
   </section>
+
   <main class="page">
     <section class="card">
       <span class="sticker">👑</span>
@@ -79,10 +85,12 @@
       <p>إنت مش بس غالي، إنت راحة للقلب. وجودك بيطمن، وابتسامتك بتفرق، وروحك ليها قيمة كبيرة.</p>
       <p>يوني بتحبك وبتفخر بيك، وبتقولك: خليك مطمن، إنت ماشي صح حتى لو الطريق متعب شوية.</p>
     </section>
+
     <section class="card accent">
       <span class="sticker">✨</span>
       <p style="font-size:1.15rem;font-weight:800;">"يا نونو، إنت مش لوحدك أبدًا.. خُد نفس وارتاح شوية، وأنا جنبك في كل خطوة."</p>
     </section>
+
     <section class="card">
       <span class="sticker">🎮</span>
       <h2>لعبة فرقع الشغف</h2>
@@ -91,6 +99,7 @@
       <div class="powerbar"><span id="powerFill"></span></div>
       <div class="game-box" id="gameBoard"></div>
     </section>
+
     <section class="card">
       <span class="sticker">🔐</span>
       <h2>رسالة سرية</h2>
@@ -98,6 +107,7 @@
       <input type="text" id="secretInput" placeholder="اكتب هنا..." />
       <div class="secret" id="secretMsg">إنت الشخص اللي بيخلّي للحياة طعم أحلى.. ويوني بتحبك جدًا جدًا 💞</div>
     </section>
+
     <section class="card">
       <span class="sticker">🎁</span>
       <h2>هدية من يوني</h2>
@@ -105,6 +115,7 @@
       <div class="gift" id="giftBtn">🎁</div>
       <div class="secret" id="giftContent">أنت تستاهل أيام أخف، وراحة أكتر، وكل حب الدنيا 💖</div>
     </section>
+
     <section class="card">
       <span class="sticker">🫶</span>
       <h2>همسة يوني لنونو</h2>
@@ -117,10 +128,41 @@
     </section>
     <p style="margin:6px 0 30px;color:var(--deep);font-weight:800;">بكل حب من يوني لنونو 🌷</p>
   </main>
+
   <script>
-    // تأثير تتبع الفأرة (اللمسة الكريتيف)
+    // نظام تشغيل الموسيقى
+    const music = document.getElementById('bgMusic');
+    const musicToggle = document.getElementById('musicToggle');
+    let isPlaying = false;
+
+    function playMusic() {
+      if (!isPlaying) {
+        music.play().then(() => {
+          isPlaying = true;
+          musicToggle.textContent = '⏸️';
+        }).catch(err => console.log("المتصفح منع التشغيل التلقائي حتى الآن"));
+      }
+    }
+
+    // تشغيل الموسيقى عند أول ضغطة أو لمسة في أي مكان
+    document.body.addEventListener('click', playMusic, { once: true });
+    document.body.addEventListener('touchstart', playMusic, { once: true });
+
+    // زر التحكم في الإيقاف والتشغيل
+    musicToggle.addEventListener('click', (e) => {
+      e.stopPropagation(); // منع تداخل الضغطات
+      if (music.paused) {
+        music.play();
+        musicToggle.textContent = '⏸️';
+      } else {
+        music.pause();
+        musicToggle.textContent = '🎵';
+      }
+    });
+
+    // ذيل الفأرة السحري
     document.addEventListener('mousemove', (e) => {
-      if(Math.random() > 0.1) return; // لتقليل الضغط على المعالج
+      if(Math.random() > 0.1) return;
       const trail = document.createElement('div');
       trail.className = 'trail';
       trail.style.left = e.clientX + 'px';
@@ -132,7 +174,7 @@
 
     const orbitLayer = document.getElementById('orbitLayer');
     const words = ['I love you','I love you','I love you','I love you','I love you','I love you'];
-    const count = 180; // تقليل العدد قليلاً لزيادة السرعة والسلاسة
+    const count = 180;
     const W = 320;
     const H = 300;
     const pts = [];
@@ -148,7 +190,7 @@
       s.textContent=words[i % words.length];
       s.style.left = `calc(50% + ${(x / 16) * (W * 0.46)}px)`;
       s.style.top = `calc(50% + ${(y / 17) * (H * 0.44)}px)`;
-      s.style.animationDelay = `${-(i * 0.05)}s`; // تسريع التزامن
+      s.style.animationDelay = `${-(i * 0.05)}s`;
       orbitLayer.appendChild(s);
     });
 
@@ -165,10 +207,10 @@
       h.style.left=Math.random()*86+'%';
       h.style.top=Math.random()*76+'%';
       gameBoard.appendChild(h);
-      const timer=setTimeout(()=>h.remove(),1500); // القلوب تختفي أسرع قليلاً
+      const timer=setTimeout(()=>h.remove(),1500);
       h.addEventListener('click',()=>{clearTimeout(timer);score=Math.min(100,score+10);updateScore();h.remove();});
     }
-    setInterval(spawnHeart, 600); // ظهور أسرع للقلوب
+    setInterval(spawnHeart, 600);
     updateScore();
 
     const secretInput=document.getElementById('secretInput');
@@ -178,12 +220,12 @@
     
     const bgLayer=document.getElementById('bgLayer');
     const bgIcons=['🌸','💗','✨','💞','🫶'];
-    for(let i=0;i<12;i++){ // زيادة عدد القلوب في الخلفية
+    for(let i=0;i<12;i++){
       const el=document.createElement('div');
       el.className='bg-heart';
       el.textContent=bgIcons[i%bgIcons.length];
       el.style.left=Math.random()*100+'vw';
-      el.style.animationDuration=(6+Math.random()*4)+'s'; // تسريع حركة الخلفية
+      el.style.animationDuration=(6+Math.random()*4)+'s';
       el.style.animationDelay=(-Math.random()*5)+'s';
       el.style.fontSize=(14+Math.random()*16)+'px';
       bgLayer.appendChild(el)
