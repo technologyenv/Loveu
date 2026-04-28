@@ -6,140 +6,288 @@
   <title>إلى نونو الغالي | من يوني 💖</title>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap');
-    :root{--bg1:#ffe6ee;--bg2:#fff8fc;--card:rgba(255,255,255,.8);--pink:#f06292;--deep:#ad1457;--line:rgba(240,98,146,.22);--text:#5c1731;--shadow:0 18px 46px rgba(173,20,87,.12)}
-    *{box-sizing:border-box} html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;scroll-behavior:smooth}
-    body{font-family:'Cairo',sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0%,var(--bg2) 34%,var(--bg1) 100%);position:relative}
-    .bg-layer{position:fixed;inset:0;pointer-events:none;z-index:-2;overflow:hidden}
-    .bg-heart{position:absolute;color:rgba(240,98,146,.12);animation:float 18s linear infinite;will-change:transform;user-select:none}
-    @keyframes float{from{transform:translateY(110vh) rotate(0deg)}to{transform:translateY(-15vh) rotate(360deg)}}
-    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px 16px;text-align:center}
-    .heart-stage{width:min(660px,92vw);height:min(660px,92vw);position:relative;display:grid;place-items:center;margin-bottom:18px;transform:translateZ(0)}
-    .orbit-layer{position:absolute;inset:0;z-index:2;pointer-events:none;isolation:isolate}
-    .orbit-word{position:absolute;left:50%;top:50%;color:var(--deep);font-weight:800;font-size:clamp(.78rem,1.05vw,.98rem);white-space:nowrap;text-shadow:0 0 8px rgba(255,255,255,.98);will-change:transform;filter:drop-shadow(0 0 2px rgba(255,255,255,.55));animation:spin 18s linear infinite}
-    @keyframes spin{from{transform:translate(-50%,-50%) rotate(0deg)}to{transform:translate(-50%,-50%) rotate(360deg)}}
-    .hero-text{width:min(820px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.88), rgba(255,248,252,.8));backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:28px;padding:22px 20px;box-shadow:var(--shadow)}
-    .hero-text h1{margin:0 0 8px;color:var(--deep);font-size:clamp(1.6rem,3vw,2.45rem);line-height:1.5}.hero-text p{margin:0;line-height:1.95;font-size:1.05rem}
-    .hint{margin-top:18px;color:var(--deep);font-weight:800;animation:bounce 1.5s infinite}.hint span{display:inline-block}
-    @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
-    .page{width:100%;display:flex;flex-direction:column;align-items:center;gap:22px;padding:0 16px 42px}
-    .card{width:min(820px,92vw);background:linear-gradient(180deg, rgba(255,255,255,.86), rgba(255,248,252,.78));backdrop-filter:blur(12px);border:1px solid rgba(240,98,146,.18);border-radius:28px;box-shadow:var(--shadow);padding:24px 20px;text-align:center;position:relative;overflow:hidden}
-    .card::before{content:"";position:absolute;inset:auto -50px -80px auto;width:220px;height:220px;background:radial-gradient(circle, rgba(240,98,146,.1), transparent 65%);border-radius:50%}
-    .sticker{font-size:2.5rem;display:inline-block;margin-bottom:8px}.card h2{margin:0 0 8px;color:var(--deep);font-size:1.45rem}.card p{margin:8px 0 0;line-height:1.9;font-size:1.04rem}
-    .accent{background:linear-gradient(135deg,#ff6fa4,#f06292);color:#fff;border:none}.accent h2,.accent p{color:#fff}
-    .game-box{margin-top:14px;min-height:260px;background:linear-gradient(180deg,#fff8fc,#fff);border:2px dashed rgba(240,98,146,.35);border-radius:22px;position:relative;overflow:hidden;box-shadow:inset 0 0 0 1px rgba(255,255,255,.6)}
-    .score{margin-top:10px;color:var(--deep);font-weight:800}.collect-heart{position:absolute;font-size:2rem;cursor:pointer;animation:pop .3s ease;user-select:none}@keyframes pop{from{transform:scale(.3);opacity:.2}to{transform:scale(1);opacity:1}}
-    input{width:min(340px,92%);margin-top:12px;padding:12px 14px;border-radius:14px;border:2px solid rgba(240,98,146,.35);outline:none;text-align:center;font-family:inherit;font-size:1rem;background:#fff}input:focus{box-shadow:0 0 0 4px rgba(240,98,146,.12);border-color:var(--pink)}
-    .secret{display:none;margin-top:14px;padding:14px;border-radius:18px;background:#fff0f6;color:var(--deep);font-weight:800;line-height:1.9}.gift{font-size:4rem;cursor:pointer;display:inline-block;transition:.2s ease;user-select:none}.gift:hover{transform:scale(1.12) rotate(10deg)}
-    .mini-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:16px}.mini{background:#fff8fc;border:1px solid rgba(240,98,146,.15);border-radius:20px;padding:16px;min-height:110px}.mini strong{display:block;color:var(--deep);margin-bottom:8px}.line{margin-top:12px;font-weight:800;color:var(--deep)}
-    .powerbar{width:min(520px,88vw);height:14px;border-radius:999px;background:#ffe3ef;overflow:hidden;margin:12px auto 0;box-shadow:inset 0 0 0 1px rgba(173,20,87,.08)} .powerbar > span{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff95b9,#ad1457);border-radius:999px;transition:width .25s ease}
-    @media (max-width:720px){.mini-grid{grid-template-columns:1fr}.heart-stage{width:min(480px,92vw);height:min(480px,92vw)}.orbit-word{font-size:.72rem}}
+    
+    :root {
+      --bg1: #ffe6ee;
+      --bg2: #fff8fc;
+      --card: rgba(255, 255, 255, 0.85);
+      --pink: #f06292;
+      --deep: #ad1457;
+      --line: rgba(240, 98, 146, 0.22);
+      --text: #5c1731;
+      --shadow: 0 15px 35px rgba(173, 20, 87, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body {
+      font-family: 'Cairo', sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, #fff 0%, var(--bg2) 35%, var(--bg1) 100%);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* تثبيت الموقع في المنتصف */
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* خلفية القلوب المتحركة */
+    .bg-layer { position: fixed; inset: 0; pointer-events: none; z-index: -2; }
+    .bg-heart { 
+      position: absolute; 
+      opacity: 0.4; 
+      animation: float Up 12s linear infinite; 
+      will-change: transform;
+    }
+    @keyframes floatUp {
+      from { transform: translateY(110vh) rotate(0deg); }
+      to { transform: translateY(-15vh) rotate(360deg); }
+    }
+
+    /* منطقة القلب العلوي - تحسين الأداء */
+    .hero {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 16px;
+      text-align: center;
+    }
+
+    .heart-stage {
+      width: min(450px, 85vw); /* تصغير الحجم قليلاً لشكل ألطف */
+      height: min(400px, 75vw);
+      position: relative;
+      margin-bottom: 25px;
+      perspective: 1000px;
+    }
+
+    .orbit-layer {
+      position: absolute;
+      inset: 0;
+      animation: heartBeat 1.5s ease-in-out infinite; /* إضافة نبض للقلب */
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .orbit-word {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      color: var(--deep);
+      font-weight: 800;
+      font-size: 0.85rem;
+      white-space: nowrap;
+      text-shadow: 0 0 5px white;
+      will-change: transform;
+      pointer-events: none;
+    }
+
+    /* الكروت */
+    .hero-text, .card {
+      width: min(700px, 92vw); /* توحيد العرض ليكون متناسق في النص */
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 30px 20px;
+      box-shadow: var(--shadow);
+      margin-bottom: 25px;
+      transition: transform 0.3s ease;
+    }
+    
+    .card:hover { transform: translateY(-5px); }
+
+    .hero-text h1 { color: var(--deep); font-size: clamp(1.5rem, 5vw, 2.2rem); margin-bottom: 15px; }
+    .hero-text p { font-size: 1.1rem; line-height: 1.8; }
+
+    .sticker { font-size: 3rem; margin-bottom: 10px; display: block; filter: drop-shadow(0 4px 5px rgba(0,0,0,0.1)); }
+
+    /* اللعبة */
+    .game-box {
+      margin-top: 15px;
+      height: 250px;
+      background: white;
+      border: 2px dashed var(--pink);
+      border-radius: 20px;
+      position: relative;
+      cursor: crosshair;
+    }
+    .powerbar {
+      width: 100%;
+      height: 12px;
+      background: #eee;
+      border-radius: 10px;
+      margin: 15px 0;
+      overflow: hidden;
+    }
+    .powerbar span { display: block; height: 100%; background: var(--pink); transition: width 0.3s ease; }
+
+    /* لمسة إضافية: تأثير عند كتابة الكلمة السرية */
+    .secret { 
+      display: none; 
+      margin-top: 15px; 
+      padding: 20px; 
+      background: #fff0f6; 
+      border-radius: 15px; 
+      border: 1px solid var(--pink);
+      animation: fadeIn 0.5s ease;
+    }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .mini { background: rgba(255,255,255,0.5); padding: 15px; border-radius: 15px; border: 1px solid var(--line); }
+
+    .hint { color: var(--deep); font-weight: bold; margin-bottom: 20px; animation: bounce 2s infinite; }
+    @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
   </style>
 </head>
 <body>
+
   <div class="bg-layer" id="bgLayer"></div>
+
   <section class="hero">
-    <div class="heart-stage" aria-label="heart animation">
+    <div class="heart-stage" id="heartStage">
       <div class="orbit-layer" id="orbitLayer"></div>
     </div>
+
     <div class="hero-text">
       <h1>إلى نونو الغالي من يوني 💖</h1>
-      <p>إنت أغلى شخص وأحن قلب، ويوني عاملة الموقع ده من حبها ليك علشان تفكرك إنك مهم جدًا ومش لوحدك أبدًا.</p>
+      <p>إنت أغلى شخص وأحن قلب، الموقع ده معمول بكل حب عشان يفكرك إنك دايمًا في القلب ومش لوحدك أبدًا.</p>
     </div>
-    <div class="hint"><span>انزل لتحت عشان تلاقي المفاجآت ✨</span></div>
+    
+    <div class="hint">اسحب لتحت لشوف مفاجآتك ✨</div>
   </section>
+
   <main class="page">
     <section class="card">
       <span class="sticker">👑</span>
-      <h2>لنونو اللي محدش بيشبهه</h2>
-      <p>إنت مش بس غالي، إنت راحة للقلب. وجودك بيطمن، وابتسامتك بتفرق، وروحك ليها قيمة كبيرة.</p>
-      <p>يوني بتحبك وبتفخر بيك، وبتقولك: خليك مطمن، إنت ماشي صح حتى لو الطريق متعب شوية.</p>
+      <h2>مكانتك غالية</h2>
+      <p>وجودك في حياة يوني مش مجرد صدفة، إنت الراحة اللي بنلاقيها في وسط التعب.</p>
     </section>
-    <section class="card accent">
-      <span class="sticker">✨</span>
-      <p style="font-size:1.15rem;font-weight:800;">"يا نونو، إنت مش لوحدك أبدًا.. خُد نفس وارتاح شوية، وأنا جنبك في كل خطوة."</p>
+
+    <section class="card" style="background: var(--deep); color: white;">
+      <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">"يا نونو، خُد نفس وارتاح.. الدنيا بتبقى أحلى بضحكتك."</p>
     </section>
+
     <section class="card">
       <span class="sticker">🎮</span>
-      <h2>لعبة فرقع الشغف</h2>
-      <p>اضغط على القلوب قبل ما تختفي عشان تزود الطاقة.</p>
-      <div class="score" id="scoreText">مستوى الشغف: 0%</div>
-      <div class="powerbar"><span id="powerFill"></span></div>
+      <h2>تجميع طاقة الحب</h2>
+      <p>فرقع القلوب عشان تشحن طاقتك يا بطل!</p>
+      <div class="powerbar"><span id="powerFill" style="width: 0%"></span></div>
+      <div id="scoreText" style="font-weight: bold; color: var(--deep);">الطاقة: 0%</div>
       <div class="game-box" id="gameBoard"></div>
     </section>
+
     <section class="card">
       <span class="sticker">🔐</span>
-      <h2>رسالة سرية</h2>
-      <p>اكتب كلمة السر: نونو</p>
-      <input type="text" id="secretInput" placeholder="اكتب هنا..." />
-      <div class="secret" id="secretMsg">إنت الشخص اللي بيخلّي للحياة طعم أحلى.. ويوني بتحبك جدًا جدًا 💞</div>
+      <h2>رسالة لقلبك</h2>
+      <p>اكتب اسمك (نونو):</p>
+      <input type="text" id="secretInput" placeholder="اكتب هنا..." style="padding: 10px; border-radius: 10px; border: 1px solid var(--pink); text-align: center; width: 80%;">
+      <div class="secret" id="secretMsg">إنت أغلى حاجة حصلت، ويوني دايمًا فخورة بيك 💞</div>
     </section>
+
     <section class="card">
       <span class="sticker">🎁</span>
-      <h2>هدية من يوني</h2>
-      <p>اضغط على الهدية وشوف المفاجأة.</p>
-      <div class="gift" id="giftBtn">🎁</div>
-      <div class="secret" id="giftContent">أنت تستاهل أيام أخف، وراحة أكتر، وكل حب الدنيا 💖</div>
+      <h2>هدية بسيطة</h2>
+      <div id="giftBtn" style="font-size: 4rem; cursor: pointer;">🎁</div>
+      <div class="secret" id="giftContent">رسالة من يوني: "أنا هنا دايمًا، في كل وقت وكل ثانية." 🌸</div>
     </section>
-    <section class="card">
-      <span class="sticker">🫶</span>
-      <h2>همسة يوني لنونو</h2>
-      <div class="mini-grid">
-        <div class="mini"><strong>رسالة 1</strong><span>أنت مش محتاج تثبت قيمتك.. هي واضحة من غير مجهود.</span></div>
-        <div class="mini"><strong>رسالة 2</strong><span>الراحة مش تأخير، دي محطة نلمّ فيها القلب وبعدين نكمل.</span></div>
-        <div class="mini"><strong>رسالة 3</strong><span>أي يوم صعب هو يوم ويمشي، لكن جمال روحك ثابت.</span></div>
-        <div class="mini"><strong>رسالة 4</strong><span>يوني دايمًا معاك، في التعب، في الهدوء، وفي كل بداية جديدة.</span></div>
-      </div>
-    </section>
-    <p style="margin:6px 0 30px;color:var(--deep);font-weight:800;">بكل حب من يوني لنونو 🌷</p>
+
+    <div class="mini-grid" style="width: min(700px, 92vw); margin-bottom: 40px;">
+        <div class="mini"><strong>✨</strong><span>إنت مميز جداً.</span></div>
+        <div class="mini"><strong>☁️</strong><span>خفف عن نفسك.</span></div>
+        <div class="mini"><strong>🌙</strong><span>يومك هيكون جميل.</span></div>
+        <div class="mini"><strong>💖</strong><span>بحبك أوي.</span></div>
+    </div>
+
+    <p style="color: var(--deep); font-weight: 800; margin-bottom: 50px;">بكل حب من يوني لنونو 🌷</p>
   </main>
+
   <script>
+    // رسم القلب بشكل أسرع وأدق
     const orbitLayer = document.getElementById('orbitLayer');
-    const words = ['I love you','I love you','I love you','I love you','I love you','I love you'];
-    const count = 220;
-    const W = 320;
-    const H = 300;
-    const pts = [];
-    for(let i=0;i<count;i++){
-      const t = (i / count) * Math.PI * 2;
-      const x = 16 * Math.pow(Math.sin(t), 3);
-      const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
-      pts.push([x, y]);
+    const totalDots = 40; // تقليل العدد لتحسين الأداء (Smooth)
+    
+    function drawHeart() {
+      for (let i = 0; i < totalDots; i++) {
+        const t = (i / totalDots) * Math.PI * 2;
+        // معادلة القلب الرياضية
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
+        
+        const dot = document.createElement('span');
+        dot.className = 'orbit-word';
+        dot.textContent = '❤';
+        dot.style.left = `calc(50% + ${x * 12}px)`;
+        dot.style.top = `calc(50% + ${y * 12}px)`;
+        // توزيع الأنيميشن بشكل يخلي القلب "بيلف"
+        dot.style.animation = `heartBeat 1.5s ease-in-out infinite`;
+        dot.style.animationDelay = `${i * 0.05}s`;
+        
+        orbitLayer.appendChild(dot);
+      }
     }
-    pts.forEach(([x, y], i) => {
-      const s=document.createElement('span');
-      s.className='orbit-word';
-      s.textContent=words[i % words.length];
-      s.style.left = `calc(50% + ${(x / 16) * (W * 0.46)}px)`;
-      s.style.top = `calc(50% + ${(y / 17) * (H * 0.44)}px)`;
-      s.style.animationDelay = `${-(i * 0.022)}s`;
-      s.style.transform = 'translate(-50%,-50%) scale(1.03)';
-      orbitLayer.appendChild(s);
-    });
-    const gameBoard=document.getElementById('gameBoard');
-    const scoreText=document.getElementById('scoreText');
-    const powerFill=document.getElementById('powerFill');
-    let score=0;
-    function updateScore(){scoreText.textContent = score < 100 ? `مستوى الشغف: ${score}%` : 'شغف نونو رجع كامل! 😍'; powerFill.style.width = score + '%'}
-    function spawnHeart(){
-      if(score>=100) return;
-      const h=document.createElement('div');
-      h.className='collect-heart';
-      h.textContent='💖';
-      h.style.left=Math.random()*86+'%';
-      h.style.top=Math.random()*76+'%';
+    drawHeart();
+
+    // اللعبة
+    const gameBoard = document.getElementById('gameBoard');
+    const powerFill = document.getElementById('powerFill');
+    const scoreText = document.getElementById('scoreText');
+    let score = 0;
+
+    function spawnHeart() {
+      if (score >= 100) return;
+      const h = document.createElement('div');
+      h.textContent = '💖';
+      h.style.position = 'absolute';
+      h.style.left = Math.random() * 90 + '%';
+      h.style.top = Math.random() * 80 + '%';
+      h.style.cursor = 'pointer';
+      h.style.fontSize = '1.5rem';
+      h.onclick = () => {
+        score += 10;
+        powerFill.style.width = score + '%';
+        scoreText.textContent = `الطاقة: ${score}%`;
+        if(score >= 100) scoreText.textContent = "طاقة نونو كاملة! 😍";
+        h.remove();
+      };
       gameBoard.appendChild(h);
-      const timer=setTimeout(()=>h.remove(),1800);
-      h.addEventListener('click',()=>{clearTimeout(timer);score=Math.min(100,score+10);updateScore();h.remove();});
+      setTimeout(() => h.remove(), 2000);
     }
-    setInterval(spawnHeart, 800);
-    updateScore();
-    const secretInput=document.getElementById('secretInput');
-    const secretMsg=document.getElementById('secretMsg');
-    secretInput.addEventListener('input',()=>{secretMsg.style.display=secretInput.value.trim()==='نونو'?'block':'none'});
-    document.getElementById('giftBtn').addEventListener('click',()=>{document.getElementById('giftBtn').textContent='💝';document.getElementById('giftContent').style.display='block'});
-    const bgLayer=document.getElementById('bgLayer');
-    const bgIcons=['🌸','💗','✨','💞','🫶'];
-    for(let i=0;i<8;i++){const el=document.createElement('div');el.className='bg-heart';el.textContent=bgIcons[i%bgIcons.length];el.style.left=Math.random()*100+'vw';el.style.animationDuration=(12+Math.random()*10)+'s';el.style.animationDelay=(-Math.random()*10)+'s';el.style.fontSize=(14+Math.random()*16)+'px';bgLayer.appendChild(el)}
+    setInterval(spawnHeart, 1000);
+
+    // السرية
+    document.getElementById('secretInput').oninput = function() {
+      document.getElementById('secretMsg').style.display = this.value === 'نونو' ? 'block' : 'none';
+    };
+
+    document.getElementById('giftBtn').onclick = function() {
+      this.textContent = '💝';
+      document.getElementById('giftContent').style.display = 'block';
+    };
+
+    // خلفية متحركة خفيفة
+    const bg = document.getElementById('bgLayer');
+    for(let i=0; i<15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'bg-heart';
+      heart.textContent = '🌸';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (5 + Math.random() * 10) + 's';
+      heart.style.fontSize = (10 + Math.random() * 20) + 'px';
+      bg.appendChild(heart);
+    }
   </script>
 </body>
 </html>
