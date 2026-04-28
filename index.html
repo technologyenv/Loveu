@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>إلى نونو الغالي | من يوني 💖</title>
+  
+  <link rel="preload" href="song.mp3" as="audio">
+
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;800&display=swap');
     :root{--bg1:#ffe6ee;--bg2:#fff8fc;--card:rgba(255,255,255,.8);--pink:#f06292;--deep:#ad1457;--line:rgba(240,98,146,.22);--text:#5c1731;--shadow:0 18px 46px rgba(173,20,87,.12)}
@@ -48,16 +51,16 @@
 </head>
 <body>
 
+  <audio id="bgMusic" loop>
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
   <div id="startOverlay">
     <div style="font-size: 5rem; margin-bottom: 10px;">👑</div>
     <h2 style="color: var(--deep); margin-bottom: 25px; font-weight: 800;">نونو؟ 💖</h2>
     <button id="startBtn">أيوة أنا 🫶</button>
     <p style="margin-top: 20px; color: var(--deep); opacity: 0.7;">يوني مستنياك جوا..</p>
   </div>
-
-  <audio id="bgMusic" loop preload="auto" style="display:none;">
-    <source src="song.mp3" type="audio/mpeg">
-  </audio>
 
   <div class="bg-layer" id="bgLayer"></div>
 
@@ -67,9 +70,8 @@
     </div>
     <div class="hero-text">
       <h1>إلى نونو الغالي من يوني 💖</h1>
-      <p>إنت أغلى شخص وأحن قلب، ويوني عاملة الموقع ده من حبها ليك علشان تفكرك إنك مهم جدًا ومش لوحدك أبدًا.</p>
+      <p>إنت أغلى شخص وأحن قلب، ويوني عاملة الموقع ده مخصوص عشانك.</p>
     </div>
-    <div class="hint"><span>انزل لتحت عشان تلاقي المفاجآت ✨</span></div>
   </section>
 
   <main class="page">
@@ -123,37 +125,40 @@
     const startOverlay = document.getElementById('startOverlay');
     const startBtn = document.getElementById('startBtn');
 
-    // التشغيل القهري للموسيقى بمجرد الضغط
+    // كود التشغيل "الحديدي"
     startBtn.onclick = function() {
-      // إخفاء الشاشة فوراً
+      // إخفاء فوري
       startOverlay.style.opacity = '0';
       startOverlay.style.pointerEvents = 'none';
       
-      // تشغيل الموسيقى
-      music.play();
-      
-      // مسح الشاشة تماماً بعد الأنيميشن
+      // تشغيل إجباري وتحميل في نفس اللحظة
+      music.load();
+      music.play().then(() => {
+        console.log("Music started!");
+      }).catch(err => {
+        // محاولة ثانية لو المتصفح اعترض
+        music.play();
+      });
+
       setTimeout(() => startOverlay.remove(), 300);
     };
 
     // القلب الكثيف
     const orbitLayer = document.getElementById('orbitLayer');
-    const count = 220;
-    const W = 320; const H = 300;
-    for(let i=0; i<count; i++){
-      const t = (i / count) * Math.PI * 2;
+    for(let i=0; i<220; i++){
+      const t = (i / 220) * Math.PI * 2;
       const x = 16 * Math.pow(Math.sin(t), 3);
       const y = -(13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t));
       const s = document.createElement('span');
       s.className = 'orbit-word';
       s.textContent = 'I love you';
-      s.style.left = `calc(50% + ${(x / 16) * (W * 0.46)}px)`;
-      s.style.top = `calc(50% + ${(y / 17) * (H * 0.44)}px)`;
-      s.style.animationDelay = `${-(i * 0.022)}s`;
+      s.style.left = `calc(50% + ${(x * 10)}px)`;
+      s.style.top = `calc(50% + ${(y * 10)}px)`;
+      s.style.animationDelay = `${-(i * 0.05)}s`;
       orbitLayer.appendChild(s);
     }
 
-    // اللعبة
+    // اللعبة (تصليح الـ 10% والـ 20%)
     const gameBoard = document.getElementById('gameBoard');
     const scoreLabel = document.getElementById('scoreText');
     const bar = document.getElementById('powerFill');
@@ -171,10 +176,10 @@
         scoreLabel.textContent = score >= 100 ? 'شغف نونو رجع كامل! 😍' : `مستوى الشغف: ${score}%`;
         h.remove(); 
       };
-      setTimeout(() => { if(h.parentNode) h.remove(); }, 1800);
-    }, 800);
+      setTimeout(() => { if(h.parentNode) h.remove(); }, 1500);
+    }, 850);
 
-    // الأسرار والهدية
+    // الأسرار
     document.getElementById('secretInput').oninput = (e) => {
       document.getElementById('secretMsg').style.display = e.target.value.trim() === 'نونو' ? 'block' : 'none';
     };
