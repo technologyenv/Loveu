@@ -11,7 +11,6 @@
     html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;scroll-behavior:smooth}
     body{font-family:'Cairo',sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0%,var(--bg2) 34%,var(--bg1) 100%);position:relative}
     
-    /* شاشة البداية الذكية للموسيقى */
     #startOverlay { position: fixed; inset: 0; background: radial-gradient(circle at top,#fff, var(--bg1)); z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
     #startBtn { padding: 18px 50px; font-size: 1.6rem; background: linear-gradient(135deg, #ff6fa4, #f06292); color: white; border: none; border-radius: 50px; cursor: pointer; font-family: 'Cairo'; box-shadow: 0 10px 25px rgba(240,98,146,0.4); animation: pulse 1.5s infinite; font-weight: 800; }
     @keyframes pulse { 0% { transform: scale(1); box-shadow: 0 10px 25px rgba(240,98,146,0.4); } 50% { transform: scale(1.05); box-shadow: 0 15px 35px rgba(240,98,146,0.6); } 100% { transform: scale(1); box-shadow: 0 10px 25px rgba(240,98,146,0.4); } }
@@ -108,7 +107,6 @@
     <section class="card">
       <span class="sticker">🎁</span>
       <h2>هدية من يوني</h2>
-      <p>اضغط على الهدية وشوف المفاجأة.</p>
       <div class="gift" id="giftBtn">🎁</div>
       <div class="secret" id="giftContent">أنت تستاهل أيام أخف، وراحة أكتر، وكل حب الدنيا 💖</div>
     </section>
@@ -131,18 +129,14 @@
     const startOverlay = document.getElementById('startOverlay');
     const startBtn = document.getElementById('startBtn');
 
-    // كود تشغيل الموسيقى مع الترحيب
     startBtn.onclick = () => {
       music.play().then(() => {
         startOverlay.style.opacity = '0';
         startOverlay.style.pointerEvents = 'none';
         setTimeout(() => startOverlay.remove(), 600);
-      }).catch(e => {
-        startOverlay.remove();
-      });
+      }).catch(e => { startOverlay.remove(); });
     };
 
-    // القلب الكثيف الأصلي (220 نقطة لجمال الشكل)
     const orbitLayer = document.getElementById('orbitLayer');
     const word = 'I love you';
     const count = 220;
@@ -160,20 +154,31 @@
       orbitLayer.appendChild(s);
     }
 
-    // لعبة القلوب
+    // --- تصحيح كود اللعبة هنا ---
     const gameBoard = document.getElementById('gameBoard');
+    const scoreLabel = document.getElementById('scoreText');
+    const bar = document.getElementById('powerFill');
     let score = 0;
+    
     setInterval(() => {
       if(score >= 100) return;
       const h = document.createElement('div');
       h.className = 'collect-heart'; h.textContent = '💖';
       h.style.left = Math.random() * 85 + '%'; h.style.top = Math.random() * 80 + '%';
       gameBoard.appendChild(h);
-      h.onclick = () => { score += 10; document.getElementById('powerFill').style.width = score + '%'; h.remove(); if(score >= 100) document.getElementById('scoreText').textContent = 'شغف نونو رجع كامل! 😍'; };
-      setTimeout(() => h.remove(), 1800);
+      h.onclick = () => { 
+        score = Math.min(100, score + 10); 
+        bar.style.width = score + '%'; 
+        if(score >= 100) {
+            scoreLabel.textContent = 'شغف نونو رجع كامل! 😍';
+        } else {
+            scoreLabel.textContent = `مستوى الشغف: ${score}%`;
+        }
+        h.remove(); 
+      };
+      setTimeout(() => { if(h.parentNode) h.remove(); }, 1800);
     }, 800);
 
-    // كلمة السر والهدية
     document.getElementById('secretInput').oninput = (e) => {
       document.getElementById('secretMsg').style.display = e.target.value.trim() === 'نونو' ? 'block' : 'none';
     };
@@ -182,7 +187,6 @@
       document.getElementById('giftContent').style.display = 'block';
     };
 
-    // خلفية القلوب
     const bg = document.getElementById('bgLayer');
     const icons = ['🌸','💗','✨','💞'];
     for(let i=0; i<10; i++) {
