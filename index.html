@@ -55,7 +55,7 @@
     <p style="margin-top: 20px; color: var(--deep); opacity: 0.7;">يوني مستنياك جوا..</p>
   </div>
 
-  <audio id="bgMusic" loop preload="auto">
+  <audio id="bgMusic" loop preload="auto" style="display:none;">
     <source src="song.mp3" type="audio/mpeg">
   </audio>
 
@@ -123,13 +123,16 @@
     const startOverlay = document.getElementById('startOverlay');
     const startBtn = document.getElementById('startBtn');
 
-    // كود تشغيل فوري وسريع جداً
-    startBtn.onclick = () => {
-      // تشغيل الموسيقى أولاً في أجزاء من الثانية
-      music.play();
-      // إخفاء الشاشة فوراً بدون تأخير
+    // التشغيل القهري للموسيقى بمجرد الضغط
+    startBtn.onclick = function() {
+      // إخفاء الشاشة فوراً
       startOverlay.style.opacity = '0';
       startOverlay.style.pointerEvents = 'none';
+      
+      // تشغيل الموسيقى
+      music.play();
+      
+      // مسح الشاشة تماماً بعد الأنيميشن
       setTimeout(() => startOverlay.remove(), 300);
     };
 
@@ -171,6 +174,7 @@
       setTimeout(() => { if(h.parentNode) h.remove(); }, 1800);
     }, 800);
 
+    // الأسرار والهدية
     document.getElementById('secretInput').oninput = (e) => {
       document.getElementById('secretMsg').style.display = e.target.value.trim() === 'نونو' ? 'block' : 'none';
     };
@@ -179,6 +183,7 @@
       document.getElementById('giftContent').style.display = 'block';
     };
 
+    // الخلفية
     const bg = document.getElementById('bgLayer');
     for(let i=0; i<10; i++) {
       const b = document.createElement('div');
