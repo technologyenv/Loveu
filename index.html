@@ -11,7 +11,6 @@
     html,body{margin:0;width:100%;min-height:100%;overflow-x:hidden;scroll-behavior:smooth}
     body{font-family:'Cairo',sans-serif;color:var(--text);background:radial-gradient(circle at top,#fff 0%,var(--bg2) 34%,var(--bg1) 100%);position:relative}
     
-    /* تعديل شاشة البداية لتكون فورية الاستجابة */
     #startOverlay { position: fixed; inset: 0; background: radial-gradient(circle at top,#fff, var(--bg1)); z-index: 10000; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: opacity 0.3s ease-out; }
     #startBtn { padding: 18px 50px; font-size: 1.6rem; background: linear-gradient(135deg, #ff6fa4, #f06292); color: white; border: none; border-radius: 50px; cursor: pointer; font-family: 'Cairo'; box-shadow: 0 10px 25px rgba(240,98,146,0.4); animation: pulse 1.5s infinite; font-weight: 800; outline: none; }
     @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
@@ -124,21 +123,17 @@
     const startOverlay = document.getElementById('startOverlay');
     const startBtn = document.getElementById('startBtn');
 
-    // التشغيل الفوري بدون انتظار
+    // كود تشغيل فوري وسريع جداً
     startBtn.onclick = () => {
-      // 1. إخفاء الشاشة فوراً
+      // تشغيل الموسيقى أولاً في أجزاء من الثانية
+      music.play();
+      // إخفاء الشاشة فوراً بدون تأخير
       startOverlay.style.opacity = '0';
       startOverlay.style.pointerEvents = 'none';
       setTimeout(() => startOverlay.remove(), 300);
-
-      // 2. محاولة تشغيل الموسيقى في الخلفية
-      music.play().catch(() => {
-          // لو فشل التشغيل لأي سبب، الموقع يكمل عادي
-          console.log("Music waiting for interaction");
-      });
     };
 
-    // القلب الكثيف الأصلي
+    // القلب الكثيف
     const orbitLayer = document.getElementById('orbitLayer');
     const count = 220;
     const W = 320; const H = 300;
@@ -155,7 +150,7 @@
       orbitLayer.appendChild(s);
     }
 
-    // اللعبة (مظبوطة بنسبة 100%)
+    // اللعبة
     const gameBoard = document.getElementById('gameBoard');
     const scoreLabel = document.getElementById('scoreText');
     const bar = document.getElementById('powerFill');
@@ -176,7 +171,6 @@
       setTimeout(() => { if(h.parentNode) h.remove(); }, 1800);
     }, 800);
 
-    // الأسرار والهدية
     document.getElementById('secretInput').oninput = (e) => {
       document.getElementById('secretMsg').style.display = e.target.value.trim() === 'نونو' ? 'block' : 'none';
     };
@@ -185,7 +179,6 @@
       document.getElementById('giftContent').style.display = 'block';
     };
 
-    // الخلفية
     const bg = document.getElementById('bgLayer');
     for(let i=0; i<10; i++) {
       const b = document.createElement('div');
